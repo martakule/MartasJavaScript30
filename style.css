@@ -51,25 +51,22 @@ p {
 }*/
 
 
-@media (max-width: 642px) {
+@media (max-width: 476px) {
 	#menu {
 		padding:7px 9px;
 		font-size: 1.7em;
 	}
 }
 
-@media (max-width: 494px) {
+/*@media (max-width: 494px) {
 	header > img {
 		display: none;
 	}
 
-	header {
-		height: 50px;
-	}
 	#menu {
 		border-radius: 0;
-		height: 100px;
-		width: 100px;
+		width: 25%;
+		height: 47px;
 		padding: 10px 12px;
 		position: relative;
 		top:0;
@@ -79,13 +76,10 @@ p {
 	#menuSmall {
 		display: inline-block;
 		float: right;
-		height: 100px;
-		width: calc(100% - 100px);
+		height: 47px;
+		width:75%;
 		background-color: white;
 	}
 
-	#menuSmall img {
-		height: 100px;
-	}
-}
+}*/
 
