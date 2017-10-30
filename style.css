@@ -38,10 +38,6 @@ p {
 	border-radius: 5px;
 }
 
-#menuSmall {
-	display: none;
-}
-
 /*header {
   background-color: white;
   background: url("images/banner.png") no-repeat;
@@ -58,28 +54,4 @@ p {
 	}
 }
 
-/*@media (max-width: 494px) {
-	header > img {
-		display: none;
-	}
-
-	#menu {
-		border-radius: 0;
-		width: 25%;
-		height: 47px;
-		padding: 10px 12px;
-		position: relative;
-		top:0;
-		left:0;
-	}
-
-	#menuSmall {
-		display: inline-block;
-		float: right;
-		height: 47px;
-		width:75%;
-		background-color: white;
-	}
-
-}*/
 
