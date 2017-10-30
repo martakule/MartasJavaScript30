@@ -6,6 +6,86 @@ html {
   box-sizing: inherit;
 }
 
+body {
+	background-color: indigo;
+	margin: 0;
+}
+
+.wrapper {
+	background-color: black;
+	max-width: 1127px;
+	color: white;
+	margin: 0 auto;
+}
+
+header img {
+	max-width: 100%;
+}
+
+header {
+	position: relative;
+}
+p {
+	margin:0;
+}
+#menu {
+	background-color: #f3ad00;
+	padding:15px 17px;
+	position: absolute;
+	top:10px;
+	left:10px;
+	font-size: 2em;
+	border-radius: 5px;
+}
+
+#menuSmall {
+	display: none;
+}
+
+/*header {
+  background-color: white;
+  background: url("images/banner.png") no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 258px;
+}*/
 
 
+@media (max-width: 642px) {
+	#menu {
+		padding:7px 9px;
+		font-size: 1.7em;
+	}
+}
+
+@media (max-width: 494px) {
+	header > img {
+		display: none;
+	}
+
+	header {
+		height: 50px;
+	}
+	#menu {
+		border-radius: 0;
+		height: 100px;
+		width: 100px;
+		padding: 10px 12px;
+		position: relative;
+		top:0;
+		left:0;
+	}
+
+	#menuSmall {
+		display: inline-block;
+		float: right;
+		height: 100px;
+		width: calc(100% - 100px);
+		background-color: white;
+	}
+
+	#menuSmall img {
+		height: 100px;
+	}
+}
 
