@@ -7,12 +7,12 @@ html {
 }
 
 body {
-	background-color: indigo;
+	background-color: #1c1f40;
+	background:linear-gradient(to right, #282753, #1c1f40);
 	margin: 0;
 }
 
 .wrapper {
-	background-color: black;
 	max-width: 1127px;
 	color: white;
 	margin: 0 auto;

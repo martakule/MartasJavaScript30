@@ -23,11 +23,13 @@
 </div>
 
 <script type="text/javascript">
+
+	// Make iframe responsive
   function iframeHeight() {
     var iFrameID = document.getElementById('iframe');
     if(iFrameID) {
       // here you can make the height, I delete it first, then I make it again
-      iFrameID.height = "";
+      // iFrameID.height = "";
       iFrameID.height = ( iFrameID.contentWindow.document.body.scrollHeight + (iFrameID.contentWindow.document.body.scrollHeight * 0.07) ) + "px";
     }   
   }
