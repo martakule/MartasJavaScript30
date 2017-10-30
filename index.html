@@ -7,7 +7,7 @@
   <script src="https://use.fontawesome.com/214392c7bf.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onresize="iframeHeight()">
 
 <div class="wrapper">
 	
@@ -17,13 +17,13 @@
 	</header>
 
 	<section>
-		<iframe id="iframe" src="welcome.html" onload="iframeLoaded()"></iframe>
+		<iframe id="iframe" src="welcome.html" onload="iframeHeight()"></iframe>
 	</section>
 
 </div>
 
 <script type="text/javascript">
-  function iframeLoaded() {
+  function iframeHeight() {
     var iFrameID = document.getElementById('iframe');
     if(iFrameID) {
       // here you can make the height, I delete it first, then I make it again
