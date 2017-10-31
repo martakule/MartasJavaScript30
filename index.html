@@ -10,10 +10,12 @@
 <body onresize="iframeHeight()">
 
 <div class="wrapper">
-	
+
 	<header>
 		<img src="images/banner.jpg">
-		<div id="menu" class="fa fa-bars" aria-hidden="true"></div>
+    <div class="menu">
+		  <span class="fa fa-bars" aria-hidden="true"></span>
+    </div>
 	</header>
 
 	<section>
@@ -29,12 +31,12 @@
     var thisFrame = document.getElementById('iframe');
     if(thisFrame) {
      thisFrame.height = ( thisFrame.contentWindow.document.body.scrollHeight + (thisFrame.contentWindow.document.body.scrollHeight * 0.04) ) + "px";
-    }   
+    }
   }
 
 // Open menu
 
-</script> 
+</script>
 
 </body>
 </html>
