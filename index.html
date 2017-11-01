@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Marta Kule | JavasScript 30</title>
-  <script src="https://use.fontawesome.com/214392c7bf.js"></script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body onresize="iframeHeight()">
@@ -13,18 +12,32 @@
 
 	<header>
 		<img src="images/banner.jpg">
-    <div class="menu">
-		  <span class="fa fa-bars" aria-hidden="true"></span>
+    <div class="menu" id="menu">
+		  <span class="icon"><img src="images/menu.svg"></span>
+		  <span class="word">menu</span>
+		  <ul>
+		  	<li data-target="00" class="itemSelected">00 about</li>
+		  	<li data-target="01">01 cat music</li>
+		  	<li data-target="02">02 clock</li>
+		  </ul>
     </div>
+    <h1><span id="number">00</span><span id="title"> About</span></h1>
 	</header>
 
 	<section>
-		<iframe id="iframe" src="about.html" scrolling="no" onload="iframeHeight()"></iframe>
+		<iframe id="iframe" src="00.html" scrolling="no" onload="iframeHeight()"></iframe>
 	</section>
 
 </div>
 
 <script type="text/javascript">
+
+// Object with page titles
+	var titles = {
+		"00":"About",
+		"01":"Cat Music",
+		"02":"clock"
+	};
 
 // Make iframe responsive
   function iframeHeight() {
@@ -35,6 +48,27 @@
   }
 
 // Open menu
+	document.getElementById("menu").addEventListener("click", function(e) {
+		this.classList.toggle("openMenu");
+  });
+
+// Make menu items react to clicks
+	document.querySelector('.menu ul').addEventListener('click', function (e) {
+	  var target = e.target;
+
+// Chanage color of currently selected menu item 
+		if (target.tagName === 'LI') {
+	    e.currentTarget.querySelector('.itemSelected').classList.remove('itemSelected');
+	    target.classList.add('itemSelected');
+	  }
+
+// Get selected item's data-target
+		var currentSelection = target.getAttribute("data-target");
+// Load address in iframe and heading above it
+		document.getElementById("iframe").src = currentSelection+".html";
+		document.getElementById("number").innerHTML = currentSelection + " ";
+		document.getElementById("title").innerHTML = titles[currentSelection];
+	});
 
 </script>
 
