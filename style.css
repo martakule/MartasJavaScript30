@@ -106,15 +106,10 @@ h1 {
 	color:  #fcc502;
 }
 
-p {
+p, li {
 	line-height: 1.5;
 	font-size: 1.2em;
 	font-weight: 300;
-}
-
-.credits {
-  font-size: .8em;
-  border-top:1px dotted #fcc502;
 }
 
 .textBlock {
@@ -171,6 +166,8 @@ a:hover {
 
 .keys {
   background-color: lightgrey;
+  background: url(images/01.jpg) center no-repeat;
+  background-size: cover;
   padding: 20px;
 }
 
@@ -181,7 +178,7 @@ a:hover {
 }
 
 .key {
-  background-color: black;
+  background-color: rgba(0,0,0,0.7);
   width: 10%;
   font-size: 3em;
   text-align: center;

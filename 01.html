@@ -8,20 +8,45 @@
 <body>
 	<section class="keys">
     <div class="homeRow">
-      <div class="key" data-sound="01.wav">A</div>
-      <div class="key" data-sound="02.wav">S</div>
-      <div class="key" data-sound="03.wav">D</div>
-      <div class="key" data-sound="04.wav">F</div>
-      <div class="key" data-sound="05.wav">G</div>
-      <div class="key" data-sound="06.wav">H</div>
-      <div class="key" data-sound="07.wav">J</div>
-      <div class="key" data-sound="08.wav">K</div>
-      <div class="key" data-sound="09.wav">L</div>
+      <div class="key" data-key="65">A</div>
+      <div class="key" data-key="83">S</div>
+      <div class="key" data-key="68">D</div>
+      <div class="key" data-key="70">F</div>
+      <div class="key" data-key="71">G</div>
+      <div class="key" data-key="72">H</div>
+      <div class="key" data-key="74">J</div>
+      <div class="key" data-key="75">K</div>
+      <div class="key" data-key="76">L</div>
     </div>
-    <div class="key spaceBar" data-sound="10.wav">SPACE</div>
+    <div class="key spaceBar" data-key="32">SPACE</div>
 	</section>
 
+  <audio data-key="65" src="audio/01.mp3"></audio>
+  <audio data-key="83" src="audio/02.mp3"></audio>
+  <audio data-key="68" src="audio/03.mp3"></audio>
+  <audio data-key="70" src="audio/04.mp3"></audio>
+  <audio data-key="71" src="audio/05.mp3"></audio>
+  <audio data-key="72" src="audio/06.mp3"></audio>
+  <audio data-key="74" src="audio/07.mp3"></audio>
+  <audio data-key="75" src="audio/08.mp3"></audio>
+  <audio data-key="76" src="audio/09.mp3"></audio>
+  <audio data-key="32" src="audio/10.mp3"></audio>
 
+<script>
+
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+    if (!audio) return;
+
+    key.classList.add('playing');
+    audio.currentTime = 0;
+    audio.play();
+  }
+
+  const keys = Array.from(document.querySelectorAll('.key'));
+  window.addEventListener('keydown', playSound);
+</script>
 
 </body>
 </html>
