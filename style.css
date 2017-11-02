@@ -153,11 +153,18 @@ a:hover {
 	}
 }
 
+/*  00 ABOUT  */
+
+.myImage {
+	float: right;
+	clear:left;
+	margin-top: 1em;
+}
 
 /*	01 CAT MUSIC	*/
 
 .keys {
-  background-color: lightgrey;
+  background: #383838;
   background: url(images/01.jpg) center no-repeat;
   background-size: cover;
   padding: 20px;
