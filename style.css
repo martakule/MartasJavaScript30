@@ -186,6 +186,13 @@ a:hover {
   padding: 7px 3px;
 }
 
+.pressed {
+	background-color: rgba(0,0,0,0.4);
+	border:1px solid lightblue;
+	box-shadow: 0 0 5px 2px lightblue;
+	transform: scale(1.25);
+}
+
 .spaceBar {
   margin:20px auto;
   width: 40%;

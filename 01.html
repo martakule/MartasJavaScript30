@@ -34,6 +34,11 @@
 
 <script>
 
+  // Act upon a click on a key. Now works only on first of class
+    document.querySelector('.key').addEventListener('click', function (e) {
+      e.target.classList.add('pressed');
+    });
+
   function playSound(e) {
     const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
     const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
