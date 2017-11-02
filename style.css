@@ -47,8 +47,8 @@ header img {
 }
 
 .openMenu {
-	max-width: 250px;
-	max-height: 500px;
+	max-width: 250px !important;
+	max-height: 500px !important;
 }
 
 .menu ul {
@@ -123,23 +123,15 @@ a {
 }
 
 a:visited {
-  color:grey;
+  color:darkgrey;
 }
 
 a:hover {
-  color:darkgrey;
+  color:grey;
   font-size: 1.03em;
 }
-/*header {
-  background-color: white;
-  background: url("images/banner.png") no-repeat;
-  background-position: center;
-  background-size: contain;
-  height: 258px;
-}*/
 
-
-/*@media (max-width: 640px) {
+@media (max-width: 640px) {
 	.menu {
 		position: absolute;
 		top:10px;
@@ -160,7 +152,7 @@ a:hover {
 		font-size: 2em;
 	}
 }
-*/
+
 
 /*	01 CAT MUSIC	*/
 
