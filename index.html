@@ -28,7 +28,11 @@
 		<iframe id="iframe" src="00.html" scrolling="no" onload="iframeHeight()"></iframe>
 	</section>
 
-</div>
+  <section class="credits">
+    <p> Menu icon credit: <a href="https://www.flaticon.com/authors/eleonor-wang" target="_blank">Eleonor Wang</a></p>
+  </section>
+
+</div> <!-- Wrapper div end-->
 
 <script type="text/javascript">
 
@@ -43,7 +47,7 @@
   function iframeHeight() {
     var thisFrame = document.getElementById('iframe');
     if(thisFrame) {
-     thisFrame.height = ( thisFrame.contentWindow.document.body.scrollHeight + (thisFrame.contentWindow.document.body.scrollHeight * 0.04) ) + "px";
+     thisFrame.height = ( thisFrame.contentWindow.document.body.scrollHeight + (thisFrame.contentWindow.document.body.scrollHeight * 0.05) ) + "px";
     }
   }
 
@@ -56,7 +60,7 @@
 	document.querySelector('.menu ul').addEventListener('click', function (e) {
 	  var target = e.target;
 
-// Chanage color of currently selected menu item 
+// Chanage color of currently selected menu item
 		if (target.tagName === 'LI') {
 	    e.currentTarget.querySelector('.itemSelected').classList.remove('itemSelected');
 	    target.classList.add('itemSelected');

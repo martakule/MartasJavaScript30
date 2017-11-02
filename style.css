@@ -14,6 +14,8 @@ body {
 	background-color: #1c1f40;
 	background:linear-gradient(to right, #282753, #1c1f40);
 	margin: 0;
+  font-family: 'Lato', sans-serif;
+  color: white;
 }
 
 .wrapper {
@@ -105,14 +107,17 @@ h1 {
 }
 
 p {
-	font-family: 'Lato', sans-serif;
-	color: white;
 	line-height: 1.5;
 	font-size: 1.2em;
 	font-weight: 300;
 }
 
-.solidText {
+.credits {
+  font-size: .8em;
+  border-top:1px dotted #fcc502;
+}
+
+.textBlock {
   padding: 0 20px;
 }
 
@@ -162,9 +167,47 @@ a:hover {
 }
 */
 
-/*	ABOUT PAGE	*/
+/*	01 CAT MUSIC	*/
 
-.blackBackground section {
-	background-color: black;
-	padding: 0 10px;
+.keys {
+  background-color: lightgrey;
+  padding: 20px;
 }
+
+.homeRow {
+  display: flex;
+  justify-content: space-between;
+  margin:20px auto;
+}
+
+.key {
+  background-color: black;
+  width: 10%;
+  font-size: 3em;
+  text-align: center;
+  border-radius: 6px;
+  text-shadow: 0 0 10px lightblue;
+  padding: 7px 3px;
+}
+
+.spaceBar {
+  margin:20px auto;
+  width: 40%;
+}
+
+@media (max-width: 500px) {
+  .homeRow {
+    flex-flow: row wrap;
+  }
+
+  .key {
+    width: 30%;
+    margin-bottom: 10px;
+  }
+
+  .spaceBar {
+    width:60%;
+  }
+}
+
+
