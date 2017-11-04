@@ -17,16 +17,17 @@
 		  <span class="word">menu</span>
       <span class="arrow">&#10782;</span>
 		  <ul>
-		  	<li data-target="00" class="itemSelected">00 about</li>
+		  	<li data-target="00" class="itemSelected">00 intro</li>
 		  	<li data-target="01">01 cat music</li>
 		  	<li data-target="02">02 clock</li>
         <li data-target="03">03 credits</li>
 		  </ul>
     </div>
-    <h1><span id="number">00</span><span id="title"> About</span></h1>
+    <h1><span id="number">00</span><span id="title"> intro</span></h1>
 	</header>
 
 	<section>
+    <p id="description">Hello world!</p>
 		<iframe id="iframe" src="00.html" scrolling="no" onload="iframeHeight()"></iframe>
 	</section>
 
@@ -51,10 +52,10 @@
 
 // Object with menu data
   var titles = {
-    "00":"About",
-    "01":"Cat Music",
-    "02":"clock",
-    "03":"credits"
+    "item00":["intro","Hello world!"],
+    "item01":["Cat Music","My variation on Wes's original drum kit. To play the meows, tap or click on the tiles or press the corresponding keys on the keyboard."],
+    "item02":["clock","This clock is made entirely of HTML building blocks &mdash; rectangles with some rounded corners. Click on the clock to tell the browser to change the shapes and colours of these rectangles."],
+    "item03":["credits","Thanks, everyone, for sharing your work!"]
   };
 
 // Load the menu list from object above
@@ -80,7 +81,8 @@
 // Focus iframe
 		document.getElementById("iframe").src = currentSelection+".html";
     document.getElementById("number").innerHTML = currentSelection + " ";
-    document.getElementById("title").innerHTML = titles[currentSelection];
+    document.getElementById("title").innerHTML = titles["item"+currentSelection][0];
+    document.getElementById("description").innerHTML = titles["item"+currentSelection][1];
     document.getElementById("iframe").focus();
 	});
 
