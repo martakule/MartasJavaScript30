@@ -15,6 +15,7 @@
     <div class="menu" id="menu">
 		  <span class="icon"><img src="images/menu.svg"></span>
 		  <span class="word">menu</span>
+      <span class="arrow">&#10782;</span>
 		  <ul>
 		  	<li data-target="00" class="itemSelected">00 about</li>
 		  	<li data-target="01">01 cat music</li>
@@ -40,15 +41,6 @@
   //document.getElementById('iframe').focus()
 //just call .focus() on the iframe element after you click the menu item
 
-
-// Object with page titles
-	var titles = {
-		"00":"About",
-		"01":"Cat Music",
-		"02":"clock",
-    "03":"credits"
-	};
-
 // Make iframe responsive
   function iframeHeight() {
     var thisFrame = document.getElementById('iframe');
@@ -57,10 +49,19 @@
     }
   }
 
-// Open menu
-	document.getElementById("menu").addEventListener("click", function(e) {
-		this.classList.toggle("openMenu");
-		console.log("clicked");
+// Object with menu data
+  var titles = {
+    "00":"About",
+    "01":"Cat Music",
+    "02":"clock",
+    "03":"credits"
+  };
+
+// Load the menu list from object above
+
+// Open and close menu
+  document.getElementById("menu").addEventListener("click", function(e) {
+    this.classList.toggle("openMenu");
   });
 
 // Make menu items react to clicks
@@ -75,10 +76,12 @@
 
 // Get selected item's data-target
 		var currentSelection = target.getAttribute("data-target");
-// Load address in iframe and heading above it
+// Load address to iframe and title and description to h1
+// Focus iframe
 		document.getElementById("iframe").src = currentSelection+".html";
-		document.getElementById("number").innerHTML = currentSelection + " ";
-		document.getElementById("title").innerHTML = titles[currentSelection];
+    document.getElementById("number").innerHTML = currentSelection + " ";
+    document.getElementById("title").innerHTML = titles[currentSelection];
+    document.getElementById("iframe").focus();
 	});
 
 </script>
