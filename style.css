@@ -18,11 +18,15 @@ body {
   color: white;
 }
 
+/*  Keep page to prescribed width  */
+
 .wrapper {
 	max-width: 1100px;
 	color: white;
 	margin: 0 auto;
 }
+
+/*  All about menu and header  */
 
 header {
 	position: relative;
@@ -46,9 +50,33 @@ header img {
   cursor: pointer;
 }
 
+.arrow {
+  opacity:0;
+  position: absolute;
+  top: -20px;
+  right: 10px;
+  font-size: 100px;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  transition: all .5s;
+}
+
 .openMenu {
 	max-width: 250px !important;
 	max-height: 500px !important;
+}
+
+.openMenu .word {
+  display: block;
+}
+
+.openMenu .arrow {
+  opacity: 1;
+}
+
+.openMenu .icon {
+  display: none;
 }
 
 .menu ul {
@@ -86,13 +114,18 @@ header img {
 	height: 40px;
 	width: 40px;
 }
+
+/*  iframe  */
+
 iframe {
 	width: 100%;
 	border:none;
 	margin: 0;
 }
 
-h1 {
+/*  Headings and description  */
+
+h1, h2 {
 	font-family: 'Nova Mono', monospace;
 	color: white;
 	font-size: 3em;
@@ -102,11 +135,23 @@ h1 {
 	padding: 0 20px;
 }
 
+h2 {
+  font-size: 2em;
+  padding: 0;
+}
+
 #number {
 	color:  #fcc502;
 }
 
-p, li {
+#description {
+  padding: 0 20px 20px 20px;
+  margin:0;
+}
+
+/*  Text elements  */
+
+p, li, td {
 	line-height: 1.5;
 	font-size: 1.2em;
 	font-weight: 300;
@@ -115,6 +160,12 @@ p, li {
 .textBlock {
   padding: 0 20px;
 }
+
+.textBlock p:first-child {
+  margin-top: 0;
+}
+
+/*  Links  */
 
 a {
   font-weight: 900;
@@ -130,6 +181,8 @@ a:hover {
   color:grey;
   font-size: 1.03em;
 }
+
+/*  Media queries for home page  */
 
 @media (max-width: 640px) {
 	.menu {
@@ -155,11 +208,22 @@ a:hover {
 
 /*  00 ABOUT  */
 
-.myImage {
-	float: right;
-	clear:left;
-	margin-top: 1em;
+.contact {
+  text-align: right;
+  border-right: 1px dotted #fcc502;
+  border-top: 1px dotted #fcc502;
+  margin: 0 20px 50px 20px;
+  padding:10px 20px 10px 0;
 }
+
+.contact h2 {
+  margin:0;
+}
+
+.contact p {
+  margin: 0;
+}
+
 
 /*	01 CAT MUSIC	*/
 
@@ -211,6 +275,30 @@ a:hover {
   .spaceBar {
     width:60%;
   }
+}
+
+/*  31 CREDITS  */
+
+.credits {
+  border-collapse: collapse;
+  margin:0 20px 50px 20px;
+}
+
+.credits tr {
+  border-bottom:1px dotted #fcc502;
+}
+
+.credits td {
+  padding: 10px;
+}
+
+.credits td:nth-child(odd) {
+  text-align: right;
+  border-right:1px dotted #fcc502;
+}
+
+.credits tr:last-child {
+  border-bottom: none;
 }
 
 
