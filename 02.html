@@ -5,15 +5,52 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="floralWallpaper">
   <div class="clock">
-    <div class="clock-face">
-      <img src="images/clockFace.jpg">
-      <div class="hand hours"></div>
-      <div class="hand minutes"></div>
-      <div class="hand seconds"></div>
-    </div>
+    <div class="centerpiece"></div>
+    <img src="images/clockFace.jpg">
+    <div class="hand" id="hours"></div>
+    <div class="hand" id="minutes"></div>
+    <div class="hand" id="seconds"></div>
+    <div class="clockFace"></div>
   </div>
+
+<script type="text/javascript">
+
+// Change the clock's looks on click
+  document.querySelector(".clock").addEventListener("click", function(){
+    this.classList.toggle("secondLook");
+  });
+
+// Declare all clock hands
+  var secondsHand = document.getElementById("seconds");
+  var minutesHand = document.getElementById("minutes");
+  var hoursHand = document.getElementById("hours");
+
+// Get the current time
+  function setDate() {
+    var now = new Date();
+
+// Get time units
+    var seconds = now.getSeconds();
+    var minutes = now.getMinutes();
+    var hours = now.getHours();
+
+// How many degrees per each time unit (and how often)?
+    var secondsInDegrees = seconds * 6 + 90;
+    var minutesInDegrees = minutes * 6 + 90;
+    var hoursInDegrees = hours * 30 + 90;
+
+// Rotate hands by appropriate degrees
+    secondsHand.style.transform = "rotate("+secondsInDegrees+"deg)";
+    minutesHand.style.transform = "rotate("+minutesInDegrees+"deg)";
+    hoursHand.style.transform = "rotate("+hoursInDegrees+"deg)";
+  }
+
+// Do all of the above once per second
+  setInterval(setDate,1000);
+
+</script>
 
 </body>
 </html>
