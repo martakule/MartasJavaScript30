@@ -34,23 +34,46 @@
 
 <script>
 
-  // Act upon a click on a key. Now works only on first of class
-    document.querySelector('.key').addEventListener('click', function (e) {
-      e.target.classList.add('pressed');
-    });
+// All playable tiles
 
-  function playSound(e) {
-    const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-    const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
-    if (!audio) return;
+var allKeys = document.querySelectorAll(".key");
 
-    key.classList.add('playing');
-    audio.currentTime = 0;
-    audio.play();
+// Function to play audio
+  function playAudio(a,b){
+    var audio = document.querySelector("audio[data-key='"+a+"']");
+    if(!audio){return;}
+    else {
+      audio.currentTime = 0;
+      audio.play();
+      b.classList.add("pressed");
+    }
   }
 
-  const keys = Array.from(document.querySelectorAll('.key'));
-  window.addEventListener('keydown', playSound);
+// Play audio by clicking on playable titles
+  allKeys.forEach(function(key){
+    key.addEventListener("click",function(e){
+      var audioData = (this.getAttribute("data-key"));
+      playAudio(audioData,this);
+    });
+  });
+
+// Play audio on pressing keys correponding to playable tiles
+  window.addEventListener("keydown", function(e){
+    var key = document.querySelector(".key[data-key='"+e.keyCode+"']");
+    var audio = e.keyCode;
+    playAudio(audio,key);
+  });
+
+// Remove class pressed as soon as the transition is over
+  allKeys.forEach(function(key){
+    key.addEventListener("transitionend", function(e){
+      if(e.propertyName !== "transform"){return}
+      else{
+        this.classList.remove("pressed");
+      }
+    });
+  });
+
 </script>
 
 </body>
