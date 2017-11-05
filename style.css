@@ -121,6 +121,7 @@ iframe {
 	width: 100%;
 	border:none;
 	margin: 0;
+  height: 700px;
 }
 
 /*  Headings and description  */
@@ -231,6 +232,8 @@ a:hover {
   background: url(images/01.jpg) center no-repeat;
   background-size: cover;
   padding: 20px;
+  min-height: 400px;
+  padding-top:10%;
 }
 
 .homeRow {
@@ -262,7 +265,7 @@ a:hover {
   width: 40%;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .homeRow {
     flex-flow: row wrap;
   }
