@@ -18,6 +18,11 @@ body {
   color: white;
 }
 
+.lightBackground {
+  background: none;
+  background-color: #585fad;
+}
+
 /*  Keep page to prescribed width  */
 
 .wrapper {
@@ -38,10 +43,10 @@ header img {
 
 .menu {
   position: absolute;
-	top:20px;
-	left:20px;
-	max-width: 166px;
-	max-height: 80px;
+	top:10px;
+	left:10px;
+	max-width: 150px;
+	max-height: 70px;
 	font-family: 'Nova Mono', monospace;
   background-color: #fcc502;
   border-radius: 0;
@@ -54,7 +59,7 @@ header img {
 	display: block;
 	font-size: 3.5em;
 	line-height: .6;
-	padding: 20px 20px 27px 20px;
+	padding: 14px 10px 27px 10px;
 }
 
 .icon {
@@ -77,8 +82,8 @@ header img {
 }
 
 .close img {
-  width:60px;
-  height: 60px;
+  width:50px;
+  height:50px;
 }
 
 .openMenu {
@@ -111,7 +116,7 @@ header img {
 }
 
 .menu li {
-  padding: 5px 0px 5px 22px;
+  padding: 5px 0px 0px 11px;
   margin:0;
 }
 
@@ -194,9 +199,6 @@ img {
 
 @media (max-width: 640px) {
 	.menu {
-		position: absolute;
-		top:10px;
-		left: 10px;
 		max-height: 70px;
 		max-width: 70px;
 	}
@@ -212,6 +214,10 @@ img {
 	h1 {
 		font-size: 2em;
 	}
+
+  h2 {
+    font-size: 1.7em;
+  }
 }
 
 /*  00 INTRO  */
@@ -417,6 +423,61 @@ img {
 @media (max-width: 330px) {
   .clock {
     margin: 50px 0;
+  }
+}
+
+/*  03 CONTROLS  */
+/*  Introducing CSS variables late into the document  */
+
+:root {
+  --saturation:100%;
+  --frameSize:15px;
+  --frameColour:#ffc107;
+}
+
+.controls, .photograph {
+  text-align: center;
+  margin:1em auto;
+}
+
+.controls {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.controls p {
+  margin:1em auto;
+  padding: 10px;
+  max-width: 300px;
+  border:1px dotted #fcc502;
+}
+
+.controls input[type="range"] {
+  width:150px;
+}
+
+.controls input[type="color"] {
+  width:150px;
+  height:30px;
+}
+
+.photograph {
+  border-style: solid;
+  border-color:var(--frameColour);
+  border-width: var(--frameSize);
+  box-shadow: 5px 5px 20px grey;
+  max-width: 640px;
+  max-height: 476px;
+  overflow: hidden;
+}
+
+.photograph img {
+  filter:saturate(var(--saturation));
+}
+
+@media (max-width: 680px) {
+  .photograph img {
+    width: 90%;
   }
 }
 

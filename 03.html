@@ -5,33 +5,43 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
 </head>
-<body>
-	<section>
-    <table class="credits">
+<body class="lightBackground">
 
-      <tr>
-        <td><a href="https://www.flaticon.com/authors/eleonor-wang" target="_blank">Eleonor Wang</a</td>
-        <td>Menu icons</td>
-      </tr>
+  <section class="controls">
+    <p>Saturation<br>
+    <input type="range" name="saturation" data-suffix="%" min="0" max="100%" value="100%"></p>
+    <p>Frame size<br>
+    <input type="range" name="frameSize" data-suffix="px" min="0" max="30" value="15"></p>
+    <p>Frame colour<br>
+    <input type="color" name="frameColour" value="#ffc107"></p>
+  </section>
+  <section class="photograph">
+    <img src="images/pretzel.jpg">
+  </section>
+  <br>
+  <br>
+  <br>
 
-      <tr>
-        <td><a href="https://unsplash.com/@joselsp" target="_blank">Jose Luis Sanchez Pereyra</a></td>
-        <td>Cat picture</td>
-      </tr>
-      <tr>
-        <td><a href="http://clipart-library.com/blank-clock-face-printable.html" target="_blank">Clipart Library</a></td>
-        <td>Vintage clock face</td>
-      </tr>
-       <tr>
-        <td><a href="https://www.transparenttextures.com/" target="_blank">Lauren at Transparent Textures</a></td>
-        <td>Gray floral wallpaper background</td>
-      </tr>
-<!--       <tr>
-        <td><a href="" target="_blank"></a></td>
-        <td></td>
-      </tr>-->
-    </table>
-	</section>
+<script type="text/javascript">
+
+// Target all input elements
+  var inputs = document.querySelectorAll('.controls input');
+
+  inputs.forEach(function(input){
+    input.addEventListener("change",realTimeUpdate)
+  });
+
+  inputs.forEach(function(input){
+    input.addEventListener("mousemove",realTimeUpdate)
+  });
+
+// Change CSS variable named like the input to input's value
+  function realTimeUpdate(){
+    var suffix = this.getAttribute("data-suffix") || "";
+    document.documentElement.style.setProperty("--"+this.name,this.value+suffix);
+  }
+
+</script>
 
 
 </body>
