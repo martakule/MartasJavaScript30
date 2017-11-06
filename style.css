@@ -476,7 +476,7 @@ img {
 }
 
 @media (max-width: 680px) {
-  .photograph img {
+  .photograph {
     width: 90%;
   }
 }
