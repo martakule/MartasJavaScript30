@@ -462,12 +462,12 @@ img {
   border-width: var(--frameSize);
   box-shadow: 5px 5px 10px grey;
   max-width: 640px;
-  max-height: 476px;
   overflow: hidden;
 }
 
 .photograph img {
   filter:saturate(var(--saturation));
+  display: block;
 }
 
 @media (max-width: 680px) {
@@ -498,7 +498,6 @@ img {
   transition:all .1s;
 }
 
-
 .controlButtons .pressed {
   border:0;
   box-shadow: none;
@@ -508,7 +507,7 @@ img {
   align-self: center;
   margin:10px;
   border-radius: 50%;
-  background:linear-gradient(to top right,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0));
+  background:linear-gradient(to bottom right,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0));
 }
 
 /*  31 CREDITS  */
