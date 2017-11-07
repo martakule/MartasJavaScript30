@@ -16,23 +16,25 @@
 
   <section class="ballContainer" id="ballContainer">
     <div data-color="j" data-size="58" style="background-color:#ff5722; width:58px; height:58px;"></div>
+    <div data-color="f" data-size="23" style="background-color:#aeea00; width:23px; height:23px;"></div>
     <div data-color="a" data-size="30" style="background-color:#7b1fa2; width:30px; height:30px;"></div>
     <div data-color="c" data-size="54" style="background-color:#2196f3; width:54px; height:54px;"></div>
+    <div data-color="h" data-size="28" style="background-color:#ffff00; width:28px; height:28px;"></div>
     <div data-color="e" data-size="61" style="background-color:#00c853; width:61px; height:61px;"></div>
     <div data-color="i" data-size="46" style="background-color:#ffab40; width:46px; height:46px;"></div>
+    <div data-color="b" data-size="37" style="background-color:#304ffe; width:37px; height:37px;"></div>
     <div data-color="l" data-size="67" style="background-color:#ec407a; width:67px; height:67px;"></div>
     <div data-color="g" data-size="18" style="background-color:#c6ff00; width:18px; height:18px;"></div>
     <div data-color="d" data-size="26" style="background-color:#64ffda; width:26px; height:26px;"></div>
-    <div data-color="b" data-size="37" style="background-color:#304ffe; width:37px; height:37px;"></div>
-    <div data-color="h" data-size="28" style="background-color:#ffff00; width:28px; height:28px;"></div>
-    <div data-color="f" data-size="23" style="background-color:#aeea00; width:23px; height:23px;"></div>
     <div data-color="k" data-size="20" style="background-color:#f44336; width:20px; height:20px;"></div>
   </section>
 
 <script type="text/javascript">
+// Original array
+  const urBalls = Array.from(document.querySelectorAll(".ballContainer div"));
 
-  var urBalls = Array.from(document.querySelectorAll(".ballContainer div"));
-  var balls;
+// Copy so the original doesn't get modified all the time
+  var balls = urBalls.slice();
   var bag = document.getElementById("ballContainer");
   var reverse = false;
 
@@ -40,10 +42,12 @@
   document.querySelectorAll(".controlButtons button").forEach(function(button){
     button.addEventListener("click",function(e){
 
+// Start button press animation
       this.classList.add("pressed");
 
       var buttonId = this.getAttribute("id");
 
+// Sorting by size and colour
       if(buttonId == "sortSize") {
         sorting("data-size");
       }
@@ -52,43 +56,47 @@
         sorting("data-color");
       }
 
+// Filtering by size
       else if (buttonId == "filterSize") {
         filtering("data-size");
       }
 
+// Reset to the original array
       else if (buttonId == "reset") {
-        balls = urBalls;
+        reverse = false;
+        appendBalls(urBalls);
       }
 
+// Condition to keep reversing on same-button clicks
       if(reverse == false){
         reverse=true
       } else {reverse=false}
-
-      appendBalls();
-
     });
   });
 
 // Sort balls
   function sorting(buttonData){
-    balls = urBalls.sort( (a,b) => a.getAttribute(buttonData) > b.getAttribute(buttonData) ? 1:-1);
+    balls = balls.sort( (a,b) => a.getAttribute(buttonData) > b.getAttribute(buttonData) ? 1:-1);
+    appendBalls(balls);
   }
 
 // Filter balls
   function filtering(buttonData){
+    var ballsLeft;
     if(reverse==false) {
-      balls = urBalls.filter(function(ball){
+      ballsLeft = balls.filter(function(ball){
         if (Number(ball.getAttribute(buttonData)) > 40) {return true}
       });
     } else {
-      balls = urBalls.filter(function(ball){
+      ballsLeft = balls.filter(function(ball){
         if (Number(ball.getAttribute(buttonData)) <= 40) {return true}
       });
     }
+    appendBalls(ballsLeft);
   }
 
-// Append balls in new order, reverse on another click on the same button
-  function appendBalls() {
+// Append balls in new order, reverse on same-button click
+  function appendBalls(balls) {
     bag.innerHTML="";
     if(reverse==false) {balls = balls.reverse();}
     for (var i = 0; i < balls.length; i++) {
@@ -96,7 +104,7 @@
     }
   }
 
-// Press animation for buttons (from 01 cat music)
+// End button press animation (from 01 cat music)
   document.querySelectorAll(".controlButtons button").forEach(function(button){
     button.addEventListener("transitionend", function(e){
       if(e.propertyName !== "transform"){return}
