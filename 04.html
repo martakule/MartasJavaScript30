@@ -6,48 +6,62 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<section>
-    <table class="credits">
 
-      <tr>
-        <td>Menu icons</td>
-        <td><a href="https://www.flaticon.com/authors/eleonor-wang" target="_blank">Eleonor Wang</a</td>
-      </tr>
+  <section class="controlButtons" id="controlButtons">
+    <button id="sortSize">sort size</button>
+    <button id="sortColor">sort colour</button>
+    <button id="filterColor">filter size</button>
+    <button id="reset">reset</button>
+  </section>
 
-      <tr>
-        <td>Cat picture</td>
-        <td><a href="https://unsplash.com/@joselsp" target="_blank">Jose Luis Sanchez Pereyra</a></td>
-      </tr>
+  <section class="ballContainer" id="ballContainer">
+    <div data-color="a" data-size="30" style="background-color:#7b1fa2; width:30px; height:30px;"></div>
+    <div data-color="b" data-size="37" style="background-color:#304ffe; width:37px; height:37px;"></div>
+    <div data-color="c" data-size="54" style="background-color:#2196f3; width:54px; height:54px;"></div>
+    <div data-color="d" data-size="26" style="background-color:#64ffda; width:26px; height:26px;"></div>
+    <div data-color="e" data-size="61" style="background-color:#00c853; width:61px; height:61px;"></div>
+    <div data-color="f" data-size="23" style="background-color:#aeea00; width:23px; height:23px;"></div>
+    <div data-color="g" data-size="18" style="background-color:#c6ff00; width:18px; height:18px;"></div>
+    <div data-color="h" data-size="28" style="background-color:#ffff00; width:28px; height:28px;"></div>
+    <div data-color="i" data-size="46" style="background-color:#ffab40; width:46px; height:46px;"></div>
+    <div data-color="j" data-size="58" style="background-color:#ff5722; width:58px; height:58px;"></div>
+    <div data-color="k" data-size="20" style="background-color:#f44336; width:20px; height:20px;"></div>
+    <div data-color="l" data-size="67" style="background-color:#ec407a; width:67px; height:67px;"></div>
+  </section>
 
-       <tr>
-        <td>Meows audio</td>
-        <td><a href="http://soundbible.com/tags-cat.html" target="_blank">Sound Bible</a></td>
-      </tr>
+<script type="text/javascript">
 
-       <tr>
-        <td>Audio editing</td>
-        <td><a href="https://www.linkedin.com/in/olsi-kule-73235862/" target="_blank">Olsi Kule</a></td>
-      </tr>
+  var urBalls = Array.from(document.querySelectorAll(".ballContainer div"));
+  var bag = document.getElementById("ballContainer");
 
-      <tr>
-        <td>Vintage clock face</td>
-        <td><a href="http://clipart-library.com/blank-clock-face-printable.html" target="_blank">Clipart Library</a></td>
-      </tr>
-       <tr>
-        <td>Gray floral wallpaper</td>
-        <td><a href="https://www.transparenttextures.com/" target="_blank">Lauren at Transparent Textures</a></td>
-      </tr>
-      <tr>
-        <td>Pretzel picture</td>
-        <td><a href="https://pixabay.com/en/users/monika1607-2963260/" target="_blank">Monika Schröder</a></td>
-      </tr>
-<!--       <tr>
-        <td></td>
-        <td><a href="" target="_blank"></a></td>
-      </tr>-->
-    </table>
-	</section>
+  document.getElementById("sortSize").addEventListener("click",function(e){
+    var balls = urBalls;
+    balls = balls.reverse();
+    appendBalls(balls);
+  });
 
+  function appendBalls(balls) {
+    for (var i = 0; i < balls.length; i++) {
+      bag.appendChild(balls[i]);
+    }
+  }
+// Reappend the balls in the new order
 
+// Press animation for buttons
+document.querySelectorAll(".controlButtons button").forEach(function(button){
+
+  button.addEventListener("click",function(e){
+    this.classList.add("pressed");
+  });
+
+  button.addEventListener("transitionend", function(e){
+    if(e.propertyName !== "transform"){return}
+    else{
+      this.classList.remove("pressed");
+    }
+  });
+});
+
+</script>
 </body>
 </html>
