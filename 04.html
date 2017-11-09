@@ -64,7 +64,8 @@
 // Reset to the original array
       else if (buttonId == "reset") {
         reverse = false;
-        appendBalls(urBalls);
+        var balls = urBalls.slice();
+        appendBalls(balls);
       }
 
 // Condition to keep reversing on same-button clicks
