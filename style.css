@@ -246,8 +246,14 @@ img {
 }
 
 .homeRow {
-  display: flex;
-  justify-content: space-between;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: flex;
+  -webkit-justify-content: space-between;
+	-moz-justify-content: space-between;
+	-ms-justify-content: space-between;
+	justify-content: space-between;
   margin:20px auto;
 }
 
@@ -276,7 +282,10 @@ img {
 
 @media (max-width: 600px) {
   .homeRow {
-    flex-flow: row wrap;
+  	-webkit-flex-flow: row wrap;
+	-moz-flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;  
   }
 
   .key {
@@ -423,7 +432,8 @@ img {
 }
 
 /*  03 CONTROLS  */
-/*  Introducing CSS variables late into the document  */
+/*  Given only 77.9% support (Can I Use, Nov 2017), 
+		I'm refraining from using them in the entire document.  */
 
 :root {
   --saturation:100%;
@@ -437,8 +447,14 @@ img {
 }
 
 .controls {
-  display: flex;
-  flex-flow: row wrap;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	-moz-flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;  
 }
 
 .controls p {
@@ -483,9 +499,19 @@ img {
 .ballContainer, .controlButtons {
   width: 90%;
   margin:20px auto;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	-moz-flex-flow: row wrap;
+	-ms-flex-flow: row wrap;
+	flex-flow: row wrap;  
+  -webkit-justify-content: center;
+	-moz-justify-content: center;
+	-ms-justify-content: center;
+	justify-content: center;
+
 }
 
 .controlButtons button {
