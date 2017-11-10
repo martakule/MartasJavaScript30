@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body class="floralWallpaper">
-  <div class="clock">
+  <div class="clock" id="clock">
     <div class="centerpiece"></div>
     <img src="images/clockFace.jpg">
     <div class="hand" id="hours"></div>
@@ -21,8 +21,18 @@
 <script type="text/javascript">
 
 // Change the clock's looks on click
-  document.querySelector(".clock").addEventListener("click", function(){
-    this.classList.toggle("secondLook");
+  document.getElementById("clock").addEventListener("click", function(){
+    var currentClass = this.className;
+    if ( currentClass.includes("secondLook") ) {
+      this.classList.remove("secondLook");
+      this.classList.add("thirdLook");
+    }
+    else if ( currentClass.includes("thirdLook") ) {
+      this.classList.remove("thirdLook");
+    }
+    else {
+      this.classList.add("secondLook");
+    }
   });
 
 // Declare all clock hands
