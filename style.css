@@ -545,7 +545,30 @@ img {
   background:linear-gradient(to bottom right,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0));
 }
 
-/*  31 CREDITS  */
+/*  05 PANELS  */
+
+.panels {
+  display: flex;
+  min-height:100vh;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: 0 0 8px black;
+}
+
+.panel {
+  flex:1;
+  background:center;
+}
+
+.p1 { background-image:url(https://picsum.photos/900/900?image=1068); }
+.p2 { background-image:url(https://picsum.photos/900/900?image=56); }
+.p3 { background-image:url(https://picsum.photos/900/900?image=974); }
+
+.panel p:nth-child(2) {
+  font-size: 4em;
+}
+
+/*  XX CREDITS  */
 
 .credits {
   border-collapse: collapse;
