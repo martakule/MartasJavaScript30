@@ -547,7 +547,7 @@ img {
 
 /*  05 PANELS  */
 
-.panels {
+.panelContainer {
   display: flex;
   min-height:100vh;
   overflow: hidden;
@@ -556,16 +556,73 @@ img {
 }
 
 .panel {
+  display: flex;
+  flex-direction: column;
   flex:1;
   background:center;
+  transition:all .8s;
+}
+
+.panel p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex:1;
+  margin:0;
+  transition:all .8s ease-in-out;
+  padding:10px;
+}
+
+.panel p:first-child {
+  transform: translateY(-100%);
+}
+
+.panel p:last-child {
+  transform: translateY(100%);
+}
+
+.panel p:nth-child(2) {
+  font-size: 4em;
+}
+
+.open {
+  flex:3;
+}
+
+.open p:nth-child(2) {
+  font-size: 6em;
+}
+
+.show p:first-child {
+  transform: translateY(0);
+}
+
+.show p:last-child {
+  transform: translateY(0);
 }
 
 .p1 { background-image:url(https://picsum.photos/900/900?image=1068); }
 .p2 { background-image:url(https://picsum.photos/900/900?image=56); }
 .p3 { background-image:url(https://picsum.photos/900/900?image=974); }
 
-.panel p:nth-child(2) {
-  font-size: 4em;
+@media (max-width: 500px) {
+
+  .panel p {
+    font-size: 1em;
+    padding: 5px;
+  }
+
+  .panel p:nth-child(2) {
+    font-size: 2.5em;
+  }
+
+  .open p:nth-child(2) {
+    font-size: 4em;
+  }
+
+  .open {
+    flex:5;
+  }
 }
 
 /*  XX CREDITS  */
@@ -586,9 +643,3 @@ img {
 .credits td:nth-child(odd) {
   text-align: right;
 }
-
-.credits tr:last-child {
-  border-bottom: none;
-}
-
-
