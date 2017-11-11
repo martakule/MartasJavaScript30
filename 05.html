@@ -26,29 +26,35 @@
 
 <script type="text/javascript">
 
-  var panels = document.getElementsByClassName("panel");
-  var openPanel = document.getElementsByClassName("open");
-  var citationShowing = document.getElementsByClassName("show");
+  var panels = Array.from(document.getElementsByClassName("panel"));
 
-  for (var i = 0; i < panels.length; i++) {
-// Close another open panel and open the clicked one
-    panels[i].addEventListener("click",function(){
-      if (openPanel.length>0) {
-        openPanel[0].classList.remove("open");
-      }
+
+// Handling opening and closing of panels
+  panels.forEach( panel => panel.addEventListener("click", function(){
+    var openPanels = Array.from(document.getElementsByClassName("open"));
+
+// If no panels open
+    if (openPanels.length==0) {
       this.classList.add("open");
-    });
-// Hide any showing citation and show the clicked one
-    panels[i].addEventListener("transitionend",function(e){
-      if (e.propertyName.includes("flex")) {
-        if (citationShowing.length>0) {
-          citationShowing[0].classList.remove("show");
-          citationShowing[1].classList.remove("show");
-        }
-      }
-        this.classList.add("show");
-    });
-  }
+    }
+// If clicked panel is open
+    else if (this.className.includes("open")) {
+      this.classList.toggle("open");
+    }
+// If panel other than clicked is open
+    else if (openPanels.length>0 && !this.className.includes("open")) {
+      openPanels.forEach(panel => panel.classList.remove("open"));
+      this.classList.add("open");
+    }
+  }) );
+
+// Handling showing quotes with delay
+  panels.forEach( panel => panel.addEventListener("transitionend", function(e){
+    if (e.propertyName.includes("flex")) {
+      this.classList.toggle("show");
+    }
+  }) );
+
 
 </script>
 

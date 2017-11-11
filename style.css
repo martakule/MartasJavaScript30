@@ -561,6 +561,7 @@ img {
   flex:1;
   background:center;
   transition:all .8s;
+  box-shadow: inset 0 0 20px black;
 }
 
 .panel p {
@@ -595,10 +596,12 @@ img {
 
 .show p:first-child {
   transform: translateY(0);
+  transition: ease-in-out .5s;
 }
 
 .show p:last-child {
   transform: translateY(0);
+  transition: ease-in-out 1s;
 }
 
 .p1 { background-image:url(https://picsum.photos/900/900?image=1068); }
