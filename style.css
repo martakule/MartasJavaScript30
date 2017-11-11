@@ -282,7 +282,7 @@ img {
 
 @media (max-width: 600px) {
   .homeRow {
-  	-webkit-flex-flow: row wrap;
+  -webkit-flex-flow: row wrap;
 	-moz-flex-flow: row wrap;
 	-ms-flex-flow: row wrap;
 	flex-flow: row wrap;
@@ -545,7 +545,119 @@ img {
   background:linear-gradient(to bottom right,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0));
 }
 
-/*  31 CREDITS  */
+/*  05 PANELS  */
+
+.panelContainer {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  min-height:100vh;
+  overflow: hidden;
+  text-align: center;
+  text-shadow: 0 0 8px black;
+}
+
+.panel {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-box-direction: column;
+  -moz-box-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  background:center;
+  transition:all .8s;
+  box-shadow: inset 0 0 20px black;
+}
+
+.panel p {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin:0;
+  transition:all .8s ease-in-out;
+  padding:10px;
+}
+
+.panel p:first-child {
+  transform: translateY(-100%);
+}
+
+.panel p:last-child {
+  transform: translateY(100%);
+}
+
+.panel p:nth-child(2) {
+  font-size: 4em;
+}
+
+.open {
+  -webkit-box-flex: 3;
+  -moz-box-flex: 3;
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+}
+
+.open p:nth-child(2) {
+  font-size: 6em;
+}
+
+.show p:first-child {
+  transform: translateY(0);
+  transition: ease-in-out .5s;
+}
+
+.show p:last-child {
+  transform: translateY(0);
+  transition: ease-in-out 1s;
+}
+
+.p1 { background-image:url(https://picsum.photos/900/900?image=1068); }
+.p2 { background-image:url(https://picsum.photos/900/900?image=56); }
+.p3 { background-image:url(https://picsum.photos/900/900?image=974); }
+
+@media (max-width: 500px) {
+
+  .panel p {
+    font-size: 1em;
+    padding: 5px;
+  }
+
+  .panel p:nth-child(2) {
+    font-size: 2.5em;
+  }
+
+  .open p:nth-child(2) {
+    font-size: 4em;
+  }
+
+  .open {
+  -webkit-box-flex: 5;
+  -moz-box-flex: 5;
+  -webkit-flex: 5;
+  -ms-flex: 5;
+  flex: 5;
+  }
+}
+
+/*  XX CREDITS  */
 
 .credits {
   border-collapse: collapse;
@@ -563,9 +675,3 @@ img {
 .credits td:nth-child(odd) {
   text-align: right;
 }
-
-.credits tr:last-child {
-  border-bottom: none;
-}
-
-

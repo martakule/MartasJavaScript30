@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="panelContainer">
+    <div class="panel p1">
+      <p>&#8220;I cook with wine, sometimes</p>
+      <p>I</p>
+      <p>even add it to the food&#8221;<br>&mdash; W. C. Fields</p>
+    </div>
+    <div class="panel p2">
+      <p>&#8220;There is no sincerer</p>
+      <p>love</p>
+      <p>than the love of food&#8221;<br>&mdash; George Bernard Shaw</p>
+    </div>
+    <div class="panel p3">
+      <p>&#8220;You can never have enough</p>
+      <p>garlic</p>
+      <p>With enough garlic,<br>you can eat The New York Times&#8221;<br>&mdash; Morley Safer</p>
+    </div>
+  </div>
+
+<script type="text/javascript">
+
+  var panels = Array.from(document.getElementsByClassName("panel"));
+
+
+// Handling opening and closing of panels
+  panels.forEach( panel => panel.addEventListener("click", function(){
+    var openPanels = Array.from(document.getElementsByClassName("open"));
+
+// If no panels open
+    if (openPanels.length==0) {
+      this.classList.add("open");
+    }
+// If clicked panel is open
+    else if (this.className.includes("open")) {
+      this.classList.toggle("open");
+    }
+// If panel other than clicked is open
+    else if (openPanels.length>0 && !this.className.includes("open")) {
+      openPanels.forEach(panel => panel.classList.remove("open"));
+      this.classList.add("open");
+    }
+  }) );
+
+// Handling showing quotes with delay
+  panels.forEach( panel => panel.addEventListener("transitionend", function(e){
+    if (e.propertyName.includes("flex")) {
+      this.classList.toggle("show");
+    }
+  }) );
+
+
+</script>
+
+</body>
+</html>
