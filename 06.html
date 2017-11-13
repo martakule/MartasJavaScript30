@@ -15,8 +15,17 @@
 
   </section>
 
-<script type="text/javascript" src="cities.js"></script>
 <script type="text/javascript">
+
+	const endpoint = "https://raw.githubusercontent.com/martakule/martakule.github.io/master/cities.json";
+	const cities = [];
+
+	fetch(endpoint)
+		.then(blob => blob.json())
+		.then(data => cities.push(...data));
+
+	console.log(cities);
+
 
 </script>
 
