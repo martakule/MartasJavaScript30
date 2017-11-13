@@ -661,6 +661,16 @@ img {
   }
 }
 
+/*  CITIES  */
+
+.cities li {
+  list-style-type: none;
+  width:250px;
+  padding: 5px 10px;
+  background:linear-gradient(to bottom,rgba(255, 255, 255, 0.3),rgba(255, 255, 255, 0));
+  background-color: #585fad;
+}
+
 /*  XX CREDITS  */
 
 .credits {
