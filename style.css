@@ -663,6 +663,10 @@ img {
 
 /* 06 CITIES  */
 
+.cities {
+  height: 1000px;
+}
+
 .cities input, .cities ul {
   display: block;
   text-align: center;
