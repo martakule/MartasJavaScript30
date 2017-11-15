@@ -661,14 +661,34 @@ img {
   }
 }
 
-/*  CITIES  */
+/* 06 CITIES  */
+
+.cities input, .cities ul {
+  display: block;
+  text-align: center;
+  width:300px;
+  margin: .5em auto;
+  padding: 10px;
+}
+
+.cities input {
+  font-size: 2em;
+  font-family: inherit;
+  border:5px solid #585fad;
+}
 
 .cities li {
+  margin: .5em auto;
   list-style-type: none;
-  width:250px;
   padding: 5px 10px;
   background:linear-gradient(to bottom,rgba(255, 255, 255, 0.3),rgba(255, 255, 255, 0));
   background-color: #585fad;
+  text-transform: capitalize;
+}
+
+.highlight {
+  color:black;
+  background-color: white;
 }
 
 /*  XX CREDITS  */
