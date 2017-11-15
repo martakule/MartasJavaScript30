@@ -83,7 +83,7 @@ header img {
 
 .openMenu {
   max-width: 250px !important;
-  max-height: 500px !important;
+  max-height: 800px !important;
 }
 
 .openMenu .word {
@@ -173,7 +173,7 @@ p, li, td {
 
 a {
   text-decoration: none;
-  border-bottom:2px solid #fcc502;
+  border-bottom:1px solid #fcc502;
   color:#fcc502;
 }
 
@@ -694,6 +694,35 @@ img {
   color:black;
   background-color: white;
 }
+
+/*  07 KIDS  */
+
+#kids {
+  text-align: center;
+}
+
+#kids div {
+  background-color: #585fad;
+  width: 100px;
+  padding: 10px 0;
+  margin:10px;
+  border-radius: 10px;
+}
+
+#kids span {
+  display: block;
+}
+
+#kids img {
+  width:100px;
+}
+
+#kids div:hover {
+ box-shadow: 0 0 10px 10px green;
+}
+
+/*.checked */
+
 
 /*  XX CREDITS  */
 
