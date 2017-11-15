@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section class="cities">
+    <input type="text" name="search">
+    <ul id="citiesList">
+      <li>City, State</li>
+    </ul>
+  </section>
+
+<script type="text/javascript">
+
+	const endpoint = "https://raw.githubusercontent.com/martakule/martakule.github.io/master/cities.json";
+	var cities = [];
+
+// Wes's arrow functions
+  // fetch(endpoint)
+  //   .then(blob => blob.json())
+  //   .then(data => cities.push(...data));
+
+// I rewrote the above in long form to see if
+// I understand arrow functions
+
+// Fetch JSON form my github server
+	fetch(endpoint).then(function(blob){
+    blob.json().then(function(data){
+      data.forEach(function(datum){
+        cities.push(datum);
+      })
+    ;})
+  ;})
+
+// Filter the list of objects for those with matching strings
+  function findMatches(word, cities) {
+    return cities.filter(place => {
+      var regex = new RegExp(word,"gi");
+      return place.city.match(regex) || place.state.match(regex);
+    });
+  }
+
+// Declare search bar and result list
+  var searchBar = document.getElementsByName("search")[0];
+  var resultList = document.getElementById("citiesList");
+
+// Show results on each keyup
+  searchBar.addEventListener("keyup",showMatches);
+
+// Insert a list of matching strings with searched string highlighted
+  function showMatches() {
+    var matchArray = findMatches(this.value, cities).sort(function(a,b){
+      if (a.city>b.city) {return 1;}
+      else {return -1;}
+    });
+    console.log(matchArray);
+
+    var html = matchArray.map(place => {
+
+      var regex = new RegExp(this.value, "gi");
+
+      var cityName = place.city.replace(regex, "<span class='highlight'>"+this.value+"</span>");
+
+      var stateName = place.state.replace(regex, "<span class='highlight'>"+this.value+"</span>");
+
+      return "<li>" + cityName + ", " + stateName + "</li>"
+    }).join("");
+
+    resultList.innerHTML = html;
+  }
+
+// Spot to get your current location from Google Maps
+
+// Spot for figuring out how to calculate distance with coordinates and the Pythagorean Theorem
+</script>
+
+</body>
+</html>
