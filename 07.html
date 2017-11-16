@@ -13,10 +13,55 @@
 	</div>
 	<div id="kids">
 		<div>
-			<img src="images/kids/kuru.svg">
+			<img src="images/kids/Kuru.svg">
 			<span>Kuru</span>
 		</div>
 	</div>
+
+<script type="text/javascript">
+
+
+// Object constructor
+  function Kids(name, hairColor, hairLength, glasses, clothes) {
+    this.name = name;
+    this.hairColor = hairColor;
+    this.hairLength = hairLength;
+    this.glasses = glasses;
+    this.clothes = clothes;
+  };
+
+// Empty array for objects
+  var kids = [],
+// Arrays with data
+      kidsName = ['Fang','Olsi','Marta','Calvin','Maryam','Dora','Laura','Matt','Kuru','Mindy','Alex','Taylor'],
+      kidsHairColor = ['brown','brown','brown','none','brown','brown','blond','brown','brown','brown','blue','brown'],
+      kidsHairLength = ['short','short','long','short','long','long','long','short','short','long','short','short'],
+      kidsGlasses = ['no','no','no','no','no','no','yes','no','yes','no','no','no'],
+      kidsClothes = ['red','pink','red','red','orange','pink','blue','red','green','red','green','orange'];
+
+// Loop through all arrays and make kid objects
+  for (var i = 0; i < kidsName.length; i++) {
+    kids.push(
+      new Kids(
+        kidsName[i],kidsHairColor[i],kidsHairLength[i],kidsGlasses[i],kidsClothes[i]
+    ));
+  }
+
+  var kidDivs = kids.forEach(function(kid){
+    return '<div><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>'
+  })
+
+  function loadKids(){
+    document.getElementById("kids").innerHTML = kidDivs;
+  }
+
+  loadKids();
+
+
+
+
+
+</script>
 
 </body>
 </html>
