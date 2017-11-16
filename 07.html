@@ -48,8 +48,11 @@
   }
 
   var kidDivs = kids.forEach(function(kid){
-    return '<div><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>'
+    console.log(kid.name);
+    //return '<div><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>'
   })
+
+  console.log(kidDivs);
 
   function loadKids(){
     document.getElementById("kids").innerHTML = kidDivs;
