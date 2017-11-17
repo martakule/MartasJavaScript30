@@ -62,10 +62,13 @@ var dataSet = [];
 // On button click, identify selected kids and put their objects in a new array
   document.getElementById("analyze").addEventListener("click", function(){
     this.classList.add("pressed");
-    var selected = Array.from(document.getElementsByClassName("select"));
-    selected.forEach(function(kidDiv){
-      console.log(kidDiv.getAttribute("data-kid"));
+    Array.from(document.getElementsByClassName("select")).forEach(function(kidDiv){
+      dataSet.push(kidDiv.getAttribute("data-kid"));
     });
+  dataSet = dataSet.map(function(x) {
+   return x+"lol";
+  });
+  console.log(dataSet);
   });
 
 // End button press animation
