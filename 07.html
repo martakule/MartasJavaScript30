@@ -7,15 +7,11 @@
 </head>
 <body>
 
-	<div class="analysis">
+	<div class="controlButtons">
 		<button id="analyze">Analyze</button>
 		<div id="results"></div>
 	</div>
 	<div id="kids">
-		<div>
-			<img src="images/kids/Kuru.svg">
-			<span>Kuru</span>
-		</div>
 	</div>
 
 <script type="text/javascript">
@@ -50,14 +46,35 @@
 // Put all kids in divs and show on page
   var html = [];
   kids.forEach(function(kid){
-    html.push('<div><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>')
+    html.push('<div data-kid="'+kid.name+'"><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>')
   })
   document.getElementById("kids").innerHTML = html.join("");
 
-// Toggle highlight on kids
+// Toggle select on kids
   document.querySelectorAll("#kids > div").forEach(function(kid){
     kid.addEventListener("click", function(){
       this.classList.toggle("select");
+    });
+  });
+
+var dataSet = [];
+
+// On button click, identify selected kids and put their objects in a new array
+  document.getElementById("analyze").addEventListener("click", function(){
+    this.classList.add("pressed");
+    var selected = Array.from(document.getElementsByClassName("select"));
+    selected.forEach(function(kidDiv){
+      console.log(kidDiv.getAttribute("data-kid"));
+    });
+  });
+
+// End button press animation
+  document.querySelectorAll(".controlButtons button").forEach(function(button){
+    button.addEventListener("transitionend", function(e){
+      if(e.propertyName !== "transform"){return}
+      else{
+        this.classList.remove("pressed");
+      }
     });
   });
 
