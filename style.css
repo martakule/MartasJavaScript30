@@ -36,6 +36,15 @@ header img {
 	max-width: 100%;
 }
 
+.subtitle {
+  font-size: 1.5em;
+  float:right;
+  position:relative;
+  bottom:2.6em;
+  right:1em;
+  text-shadow: 1px 1px 5px black;
+}
+
 .menu {
   position: absolute;
 	top:20px;
@@ -192,6 +201,7 @@ img {
 /*  Media queries for home page  */
 
 @media (max-width: 640px) {
+
 	.menu {
 		max-height: 70px;
 		max-width: 70px;
@@ -214,6 +224,14 @@ img {
   h2 {
     font-size: 1.7em;
   }
+}
+
+@media (max-width: 450px) {
+
+  .subtitle {
+    font-size: 1.2em;
+  }
+
 }
 
 /*  00 INTRO  */
@@ -699,6 +717,14 @@ img {
 
 #kids {
   text-align: center;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
 }
 
 #kids div {
@@ -717,7 +743,7 @@ img {
   width:100px;
 }
 
-#kids div:hover {
+.select {
  box-shadow: 0 0 0 5px #fcc502;
 }
 

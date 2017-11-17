@@ -37,7 +37,7 @@
       kidsHairColor = ['brown','brown','brown','none','brown','brown','blond','brown','brown','brown','blue','brown'],
       kidsHairLength = ['short','short','long','short','long','long','long','short','short','long','short','short'],
       kidsGlasses = ['no','no','no','no','no','no','yes','no','yes','no','no','no'],
-      kidsClothes = ['red','pink','red','red','orange','pink','blue','red','green','red','green','orange'];
+      kidsClothes = ['blue','pink','red','red','orange','pink','blue','red','green','red','green','orange'];
 
 // Loop through all arrays and make kid objects
   for (var i = 0; i < kidsName.length; i++) {
@@ -47,22 +47,19 @@
     ));
   }
 
-  var kidDivs = kids.forEach(function(kid){
-    console.log(kid.name);
-    //return '<div><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>'
+// Put all kids in divs and show on page
+  var html = [];
+  kids.forEach(function(kid){
+    html.push('<div><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>')
   })
+  document.getElementById("kids").innerHTML = html.join("");
 
-  console.log(kidDivs);
-
-  function loadKids(){
-    document.getElementById("kids").innerHTML = kidDivs;
-  }
-
-  loadKids();
-
-
-
-
+// Toggle highlight on kids
+  document.querySelectorAll("#kids > div").forEach(function(kid){
+    kid.addEventListener("click", function(){
+      this.classList.toggle("select");
+    });
+  });
 
 </script>
 
