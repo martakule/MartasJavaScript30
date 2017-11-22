@@ -57,18 +57,26 @@
     });
   });
 
-var dataSet = [];
+  var kidNames = [];
+  var dataSet = [];
 
 // On button click, identify selected kids and put their objects in a new array
   document.getElementById("analyze").addEventListener("click", function(){
+
+// Button behaviour
     this.classList.add("pressed");
+
+// Get names of selected kids
     Array.from(document.getElementsByClassName("select")).forEach(function(kidDiv){
-      dataSet.push(kidDiv.getAttribute("data-kid"));
+      kidNames.push(kidDiv.getAttribute("data-kid"));
     });
-  dataSet = dataSet.map(function(x) {
-   return x+"lol";
-  });
-  console.log(dataSet);
+
+// From kids objects push to dataSet those whose names match
+    // kidNames.forEach(function(kidName){
+    //   dataSet.push(kids.KidsName == kidName);
+    // });
+
+  console.log(kidNames);
   });
 
 // End button press animation
