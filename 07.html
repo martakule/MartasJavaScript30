@@ -68,15 +68,18 @@
 
 // Get names of selected kids
     Array.from(document.getElementsByClassName("select")).forEach(function(kidDiv){
-      kidNames.push(kidDiv.getAttribute("data-kid"));
+        kidNames.push(kidDiv.getAttribute("data-kid"));
     });
 
-// From kids objects push to dataSet those whose names match
-    // kidNames.forEach(function(kidName){
-    //   dataSet.push(kids.KidsName == kidName);
-    // });
+// FPush to dataSet those kid objects whose names match
+    kidNames.forEach(function(kidName){
+      kids.forEach(function(kidObject){
+        if (kidObject.name == kidName){dataSet.push(kidObject)};
+      });
+    });
 
-  console.log(kidNames);
+console.log(dataSet);
+
   });
 
 // End button press animation
