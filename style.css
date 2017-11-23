@@ -716,6 +716,7 @@ img {
 /*  07 KIDS  */
 
 #kids {
+  padding: 20px;
   text-align: center;
   display: -webkit-flex;
   display: -moz-flex;
@@ -725,6 +726,10 @@ img {
   -moz-flex-flow: row wrap;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
+/*  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;*/
 }
 
 #kids div {
@@ -745,6 +750,16 @@ img {
 
 .select {
  box-shadow: 0 0 0 5px #fcc502;
+}
+
+.hidden {
+  display: none;
+}
+
+#results {
+  list-style: none;
+  margin: 0 30px;
+  padding:0;
 }
 
 /*  XX CREDITS  */

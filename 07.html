@@ -8,19 +8,18 @@
 <body>
 
 	<div class="controlButtons">
-		<button id="analyze">Analyze</button>
+    <button id="analyze">Analyze</button>
+		<button id="reset" class="hidden">Reset</button>
   </div>
   
-		<div id="results">
-      <ul>
-        <li>Everyone is wearing red or pink.<span id="red"></span></li>
-        <li>Everyone's name starts with "M".<span id="em"></span></li>
-        <li>Someone is wearing glasses.<span id="glasses"></span></li>
-        <li>Someone has blue hair.<span id="blue"></span></li>
-        <li>Marta is here.<span id="Marta"></span></li>
-        <li>Mindy is here.<span id="Mindy"></span></li>
-      </ul>  
-    </div>
+    <ul id="results" class="hidden">
+      <li>Everyone is wearing red or pink.<span id="red"></span></li>
+      <li>Everyone's name starts with "M".<span id="em"></span></li>
+      <li>Someone is wearing glasses.<span id="glasses"></span></li>
+      <li>Someone has blue hair.<span id="blue"></span></li>
+      <li>Marta is here.<span id="Marta"></span><span id="Marta2"></span></li>
+      <li>Mindy is here.<span id="Mindy"></span><span id="Mindy2"></span></li>
+    </ul>  
 
 	<div id="kids">
 	</div>
@@ -39,10 +38,10 @@
 // Empty array for objects
   var kids = [],
 // Arrays with data
-      kidsName = ['Fang','Olsi','Marta','Calvin','Maryam','Dora','Laura','Matt','Kuru','Mindy','Alex','Taylor'],
+      kidsName = ['Fang','Olsi','Marta','Calvin','Maryam','Liana','Laura','Matt','Kuru','Mindy','Alex','Taylor'],
       kidsHair = ['brown','brown','brown','none','brown','brown','blond','brown','brown','brown','blue','brown'],
       kidsGlasses = ['no','no','no','no','no','no','yes','no','yes','no','no','no'],
-      kidsClothes = ['blue','pink','red','red','orange','pink','blue','red','green','pink','green','orange'];
+      kidsClothes = ['blue','pink','red','red','orange','blue','blue','red','green','pink','green','orange'];
 
 // 2. MAKING AND DISPLAYING THE OBJECT
 // Loop through all arrays and make kid objects
@@ -79,31 +78,50 @@
 // Button behaviour
     this.classList.add("pressed");
 
-// Get names of selected kids
-    Array.from(document.getElementsByClassName("select")).forEach(function(kidDiv){
-        kidNames.push(kidDiv.getAttribute("data-kid"));
-    });
+// Check if at least one was selected
+    var selectedKids = Array.from(document.getElementsByClassName("select"));
+    if (selectedKids.length == 0) {alert("Pick at least one icon to have a data set.")}
+      else {
 
-// Push to dataSet those kid objects whose names match
-    kidNames.forEach(function(kidName){
-      kids.find(function(kidObject){
-        if (kidObject.name == kidName){dataSet.push(kidObject)};
-      });
-    });
+    // Remove not selected kids
+        document.querySelectorAll("#kids > div").forEach(function(kid){
+          if (kid.className!=="select"){
+            kid.className = "hidden";
+          }
+        });
 
-  // 5. ANALYZING DATASET: MAIN POINT OF EXERCISE
-  // Use .every()
-    if(dataSet.every(datum => (datum.clothes=="red" || datum.clothes=="pink"))){sayYes("red")}else{sayNo("red")};
-    if(dataSet.every(datum => (datum.name.charAt(0)=="M"))){sayYes("em")}else{sayNo("em")};
+    // Get names of selected kids
+        selectedKids.forEach(function(kidDiv){
+          kidNames.push(kidDiv.getAttribute("data-kid"));
+        });
 
-  // Use .some()
-    if(dataSet.some(datum => (datum.glasses=="yes"))){sayYes("glasses")}else{sayNo("glasses")};
-    if(dataSet.some(datum => (datum.hair=="blue"))){sayYes("blue")}else{sayNo("blue")};
+    // Push to dataSet those kid objects whose names match
+        kidNames.forEach(function(kidName){
+          kids.find(function(kidObject){
+            if (kidObject.name == kidName){dataSet.push(kidObject)};
+          });
+        });
 
-  // Use .find()
-    if(dataSet.find(datum => (datum.name=="Marta"))){showPosition("Marta"); sayYes("Marta")}else{sayNo("Marta")};
-    if(dataSet.find(datum => (datum.name=="Mindy"))){showPosition("Mindy"); sayYes("Mindy")}else{sayNo("Mindy")};
-  });  
+      // 5. ANALYZING DATASET: MAIN POINT OF EXERCISE
+      // Use .every()
+        if(dataSet.every(datum => (datum.clothes=="red" || datum.clothes=="pink"))){sayYes("red")}else{sayNo("red")};
+        if(dataSet.every(datum => (datum.name.charAt(0)=="M"))){sayYes("em")}else{sayNo("em")};
+
+      // Use .some()
+        if(dataSet.some(datum => (datum.glasses=="yes"))){sayYes("glasses")}else{sayNo("glasses")};
+        if(dataSet.some(datum => (datum.hair=="blue"))){sayYes("blue")}else{sayNo("blue")};
+
+      // Use .find()
+        if(dataSet.find(datum => (datum.name=="Marta"))){showPosition("Marta"); sayYes("Marta")}else{sayNo("Marta")};
+        if(dataSet.find(datum => (datum.name=="Mindy"))){showPosition("Mindy"); sayYes("Mindy")}else{sayNo("Mindy")};
+      
+      // 6. DISPLAYING ANALYSIS 
+        document.getElementById("results").classList.remove("hidden");
+        document.getElementById("reset").classList.remove("hidden");
+        document.getElementById("analyze").classList.add("hidden");
+      }
+
+    });  
 
 // Feedback: attach a checkmark or cross
   function sayYes(id){
@@ -116,9 +134,9 @@
 
   // Use .findIndex()
   function showPosition(id){
-    var positionWords = ["",]
-    var position = dataSet.findIndex(datum => (datum.name=="Kuru"));
-    //console.log("Marta is " + (position+1) + " from the left.");    
+    var positionWords = ["First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth","Ninth","Tenth"];
+    var position = dataSet.findIndex(datum => (datum.name==id));
+    document.getElementById(id+"2").innerHTML = "<br>  ("+positionWords[position]+" from the left.)";
   }
 
 
