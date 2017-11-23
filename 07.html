@@ -9,8 +9,19 @@
 
 	<div class="controlButtons">
 		<button id="analyze">Analyze</button>
-		<div id="results"></div>
-	</div>
+  </div>
+  
+		<div id="results">
+      <ul>
+        <li>Everyone is wearing red or pink.<span id="red"></span></li>
+        <li>Everyone's name starts with "M".<span id="em"></span></li>
+        <li>Someone is wearing glasses.<span id="glasses"></span></li>
+        <li>Someone has blue hair.<span id="blue"></span></li>
+        <li>Marta is here.<span id="Marta"></span></li>
+        <li>Mindy is here.<span id="Mindy"></span></li>
+      </ul>  
+    </div>
+
 	<div id="kids">
 	</div>
 
@@ -18,10 +29,9 @@
 
 // 1. DATA FOR THE OBJECT
 // Object constructor
-  function Kids(name, hairColor, hairLength, glasses, clothes) {
+  function Kids(name, hairColor, glasses, clothes) {
     this.name = name;
-    this.hairColor = hairColor;
-    this.hairLength = hairLength;
+    this.hair = hairColor;
     this.glasses = glasses;
     this.clothes = clothes;
   };
@@ -30,17 +40,16 @@
   var kids = [],
 // Arrays with data
       kidsName = ['Fang','Olsi','Marta','Calvin','Maryam','Dora','Laura','Matt','Kuru','Mindy','Alex','Taylor'],
-      kidsHairColor = ['brown','brown','brown','none','brown','brown','blond','brown','brown','brown','blue','brown'],
-      kidsHairLength = ['short','short','long','short','long','long','long','short','short','long','short','short'],
+      kidsHair = ['brown','brown','brown','none','brown','brown','blond','brown','brown','brown','blue','brown'],
       kidsGlasses = ['no','no','no','no','no','no','yes','no','yes','no','no','no'],
-      kidsClothes = ['blue','pink','red','red','orange','pink','blue','red','green','red','green','orange'];
+      kidsClothes = ['blue','pink','red','red','orange','pink','blue','red','green','pink','green','orange'];
 
 // 2. MAKING AND DISPLAYING THE OBJECT
 // Loop through all arrays and make kid objects
   for (var i = 0; i < kidsName.length; i++) {
     kids.push(
       new Kids(
-        kidsName[i],kidsHairColor[i],kidsHairLength[i],kidsGlasses[i],kidsClothes[i]
+        kidsName[i],kidsHair[i],kidsGlasses[i],kidsClothes[i]
     ));
   }
 
@@ -81,23 +90,36 @@
         if (kidObject.name == kidName){dataSet.push(kidObject)};
       });
     });
-console.log(dataSet)
+
   // 5. ANALYZING DATASET: MAIN POINT OF EXERCISE
   // Use .every()
-    if(dataSet.every(datum => (datum.clothes=="red"||datum.clothes=="pink"))){console.log("Everyone is wearing red or pink.")};
+    if(dataSet.every(datum => (datum.clothes=="red" || datum.clothes=="pink"))){sayYes("red")}else{sayNo("red")};
+    if(dataSet.every(datum => (datum.name.charAt(0)=="M"))){sayYes("em")}else{sayNo("em")};
 
   // Use .some()
-    dataSet.some(function(datum){});
-    if(dataSet.some(datum => (datum.glasses=="yes"))){console.log("Someone is wearing glasses.")};
+    if(dataSet.some(datum => (datum.glasses=="yes"))){sayYes("glasses")}else{sayNo("glasses")};
+    if(dataSet.some(datum => (datum.hair=="blue"))){sayYes("blue")}else{sayNo("blue")};
 
   // Use .find()
-    if(dataSet.find(datum => (datum.name=="Kuru"))){console.log("Kuru is here!")};
+    if(dataSet.find(datum => (datum.name=="Marta"))){showPosition("Marta"); sayYes("Marta")}else{sayNo("Marta")};
+    if(dataSet.find(datum => (datum.name=="Mindy"))){showPosition("Mindy"); sayYes("Mindy")}else{sayNo("Mindy")};
+  });  
 
+// Feedback: attach a checkmark or cross
+  function sayYes(id){
+    document.getElementById(id).innerHTML = " &#10004;";
+  }
+
+  function sayNo(id){
+    document.getElementById(id).innerHTML = " &#10008;";
+  }  
 
   // Use .findIndex()
+  function showPosition(id){
+    var positionWords = ["",]
     var position = dataSet.findIndex(datum => (datum.name=="Kuru"));
-    console.log("Kuru is " + (position+1) + " from the left.");
-  });
+    //console.log("Marta is " + (position+1) + " from the left.");    
+  }
 
 
 // ALL BUTTON BEHAVIOUR
