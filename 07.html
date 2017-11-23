@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
 
-
+// 1. DATA FOR THE OBJECT
 // Object constructor
   function Kids(name, hairColor, hairLength, glasses, clothes) {
     this.name = name;
@@ -35,6 +35,7 @@
       kidsGlasses = ['no','no','no','no','no','no','yes','no','yes','no','no','no'],
       kidsClothes = ['blue','pink','red','red','orange','pink','blue','red','green','red','green','orange'];
 
+// 2. MAKING AND DISPLAYING THE OBJECT
 // Loop through all arrays and make kid objects
   for (var i = 0; i < kidsName.length; i++) {
     kids.push(
@@ -50,6 +51,7 @@
   })
   document.getElementById("kids").innerHTML = html.join("");
 
+// 3. SELECTING DATASET
 // Toggle select on kids
   document.querySelectorAll("#kids > div").forEach(function(kid){
     kid.addEventListener("click", function(){
@@ -60,7 +62,9 @@
   var kidNames = [];
   var dataSet = [];
 
-// On button click, identify selected kids and put their objects in a new array
+// So much happens on this button click...
+
+// 4. CREATING DATASET
   document.getElementById("analyze").addEventListener("click", function(){
 
 // Button behaviour
@@ -71,17 +75,32 @@
         kidNames.push(kidDiv.getAttribute("data-kid"));
     });
 
-// FPush to dataSet those kid objects whose names match
+// Push to dataSet those kid objects whose names match
     kidNames.forEach(function(kidName){
-      kids.forEach(function(kidObject){
+      kids.find(function(kidObject){
         if (kidObject.name == kidName){dataSet.push(kidObject)};
       });
     });
+console.log(dataSet)
+  // 5. ANALYZING DATASET: MAIN POINT OF EXERCISE
+  // Use .every()
+    if(dataSet.every(datum => (datum.clothes=="red"||datum.clothes=="pink"))){console.log("Everyone is wearing red or pink.")};
 
-console.log(dataSet);
+  // Use .some()
+    dataSet.some(function(datum){});
+    if(dataSet.some(datum => (datum.glasses=="yes"))){console.log("Someone is wearing glasses.")};
 
+  // Use .find()
+    if(dataSet.find(datum => (datum.name=="Kuru"))){console.log("Kuru is here!")};
+
+
+  // Use .findIndex()
+    var position = dataSet.findIndex(datum => (datum.name=="Kuru"));
+    console.log("Kuru is " + (position+1) + " from the left.");
   });
 
+
+// ALL BUTTON BEHAVIOUR
 // End button press animation
   document.querySelectorAll(".controlButtons button").forEach(function(button){
     button.addEventListener("transitionend", function(e){
