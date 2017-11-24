@@ -726,10 +726,11 @@ img {
   -moz-flex-flow: row wrap;
   -ms-flex-flow: row wrap;
   flex-flow: row wrap;
-/*  -webkit-justify-content: space-between;
-  -moz-justify-content: space-between;
-  -ms-justify-content: space-between;
-  justify-content: space-between;*/
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+
 }
 
 #kids div {
@@ -760,6 +761,16 @@ img {
   list-style: none;
   margin: 0 30px;
   padding:0;
+  text-align: center;
+  border:5px solid #fcc502;
+  border-radius: 10px;
+  max-width: 310px;
+  margin: 1em auto;
+  background-color: #585fad
+}
+
+#results > li > span {
+  color: #fcc502;
 }
 
 /*  XX CREDITS  */

@@ -53,19 +53,26 @@
   }
 
 // Put all kids in divs and show on page
-  var html = [];
-  kids.forEach(function(kid){
-    html.push('<div data-kid="'+kid.name+'"><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>')
-  })
-  document.getElementById("kids").innerHTML = html.join("");
+	showKids();
 
+	function showKids() {	
+	  var html = [];
+	  kids.forEach(function(kid){
+	    html.push('<div data-kid="'+kid.name+'"><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>')
+	  })
+	  document.getElementById("kids").innerHTML = html.join("");
+	}
 // 3. SELECTING DATASET
 // Toggle select on kids
-  document.querySelectorAll("#kids > div").forEach(function(kid){
-    kid.addEventListener("click", function(){
-      this.classList.toggle("select");
-    });
-  });
+	toggleSelect();
+
+	function toggleSelect() {
+	  document.querySelectorAll("#kids > div").forEach(function(kid){
+	    kid.addEventListener("click", function(){
+	      this.classList.toggle("select");
+	    });
+	  });	
+	}
 
   var kidNames = [];
   var dataSet = [];
@@ -118,10 +125,19 @@
       // 6. DISPLAYING ANALYSIS 
         document.getElementById("results").classList.remove("hidden");
         document.getElementById("reset").classList.remove("hidden");
-        document.getElementById("analyze").classList.add("hidden");
+        this.classList.add("hidden");
       }
-
     });  
+
+// 7. RESETTING EXERCISE
+	document.getElementById("reset").addEventListener("click", function(){
+		this.classList.add("hidden");
+		document.getElementById("analyze").className="";
+		document.getElementById("results").classList.add("hidden");
+		dataSet = [];
+		showKids();
+		toggleSelect();
+	});
 
 // Feedback: attach a checkmark or cross
   function sayYes(id){
