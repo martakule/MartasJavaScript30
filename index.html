@@ -45,8 +45,19 @@
 
 <script type="text/javascript">
 
-  //document.getElementById('iframe').focus()
-//just call .focus() on the iframe element after you click the menu item
+// On load, read hash from URL
+  window.onload = function(){
+    var currentHash = window.location.hash.substr(1);
+    if(!currentHash) window.location.hash = "00";
+
+// Unhighlight first menu item
+// and highlight the chosen menu item 
+    document.querySelector(".itemSelected").className = "";
+    document.querySelector("[data-target='"+currentHash+"']").className = "itemSelected";
+
+// Load appropriate iframe and title
+    loadIt(currentHash);
+  };
 
 // Make iframe responsive
   function iframeHeight() {
@@ -69,7 +80,6 @@
     "itemxx":["credits","A huge thank you to all these generous creators:"]
   };
 
-
 // Open and close menu
   document.getElementById("menu").addEventListener("click", function(e) {
     this.classList.toggle("openMenu");
@@ -87,14 +97,21 @@
 
 // Get selected item's data-target
 		var currentSelection = target.getAttribute("data-target");
+
 // Load address to iframe and title and description to h1
+    loadIt(currentSelection)
+// Change link hash
+    window.location.hash = currentSelection;
 // Focus iframe
-		document.getElementById("iframe").src = currentSelection+".html";
-    document.getElementById("number").innerHTML = currentSelection + " ";
-    document.getElementById("title").innerHTML = titles["item"+currentSelection][0];
-    document.getElementById("description").innerHTML = titles["item"+currentSelection][1];
     document.getElementById("iframe").focus();
 	});
+
+  function loadIt(what){
+    document.getElementById("iframe").src = what+".html";
+    document.getElementById("number").innerHTML = what + " ";
+    document.getElementById("title").innerHTML = titles["item"+what][0];
+    document.getElementById("description").innerHTML = titles["item"+what][1];    
+  }
 
 </script>
 
