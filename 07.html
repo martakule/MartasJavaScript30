@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="controlButtons">
+    <button id="analyze">Analyze</button>
+		<button id="reset" class="hidden">Reset</button>
+  </div>
+  
+    <ul id="results" class="hidden">
+      <li>Everyone is wearing red or pink.<span id="red"></span></li>
+      <li>Everyone's name starts with "M".<span id="em"></span></li>
+      <li>Someone is wearing glasses.<span id="glasses"></span></li>
+      <li>Someone has blue hair.<span id="blue"></span></li>
+      <li>Marta is here.<span id="Marta"></span><span id="Marta2"></span></li>
+      <li>Mindy is here.<span id="Mindy"></span><span id="Mindy2"></span></li>
+    </ul>  
+
+	<div id="kids">
+	</div>
+  <br>
+  <br>
+
+<script type="text/javascript">
+
+// 1. DATA FOR THE OBJECT
+// Object constructor
+  function Kids(name, hairColor, glasses, clothes) {
+    this.name = name;
+    this.hair = hairColor;
+    this.glasses = glasses;
+    this.clothes = clothes;
+  };
+
+// Empty array for objects
+  var kids = [],
+
+// Arrays with data
+      kidsName = ['Fang','Olsi','Marta','Calvin','Maryam','Liana','Laura','Matt','Kuru','Mindy','Alex','Taylor'],
+      kidsHair = ['brown','brown','brown','none','brown','brown','blond','brown','brown','brown','blue','brown'],
+      kidsGlasses = ['no','no','no','no','no','no','yes','no','yes','no','no','no'],
+      kidsClothes = ['blue','pink','red','red','orange','blue','blue','red','green','pink','green','orange'];
+
+// 2. MAKING AND DISPLAYING THE OBJECT
+// Loop through all arrays and make kid objects
+  for (var i = 0; i < kidsName.length; i++) {
+    kids.push(
+      new Kids(
+        kidsName[i],kidsHair[i],kidsGlasses[i],kidsClothes[i]
+    ));
+  }
+
+// Put all kids in divs and show on page
+	showKids();
+
+	function showKids() {	
+	  var html = [];
+	  kids.forEach(function(kid){
+	    html.push('<div data-kid="'+kid.name+'"><img src="images/kids/'+kid.name+'.svg"><span>'+kid.name+'</span></div>')
+	  })
+	  document.getElementById("kids").innerHTML = html.join("");
+	}
+
+// 3. SELECTING DATASET
+// Toggle select on kids
+	toggleSelect();
+
+	function toggleSelect() {
+	  document.querySelectorAll("#kids > div").forEach(function(kid){
+	    kid.addEventListener("click", function(){
+	      this.classList.toggle("select");
+	    });
+	  });	
+	}
+
+  var kidNames = [];
+  var dataSet = [];
+
+// So much happens on this button click...
+
+// 4. CREATING DATASET
+  document.getElementById("analyze").addEventListener("click", function(){
+
+// Button behaviour
+    this.classList.add("pressed");
+
+// Check if at least one was selected
+    var selectedKids = Array.from(document.getElementsByClassName("select"));
+
+    if (selectedKids.length == 0) {alert("Pick at least one icon to have a data set.")}
+      else {
+
+    // Remove not selected kids
+        document.querySelectorAll("#kids > div").forEach(function(kid){
+          if (kid.className!=="select"){
+            kid.className = "hidden";
+          }
+        });
+
+    // Get names of selected kids
+        selectedKids.forEach(function(kidDiv){
+          kidNames.push(kidDiv.getAttribute("data-kid"));
+        });
+
+    // Push to dataSet those kid objects whose names match
+        kidNames.forEach(function(kidName){
+          for (var i = 0; i < kids.length; i++) {
+            if (kids[i].name == kidName){
+              {dataSet.push(kids[i])};
+              break;
+            }
+          }          
+        });
+
+      // 5. ANALYZING DATASET: MAIN POINT OF EXERCISE
+      // Use .every()
+        if(dataSet.every(datum => (datum.clothes=="red" || datum.clothes=="pink"))){sayYes("red")}else{sayNo("red")};
+        if(dataSet.every(datum => (datum.name.charAt(0)=="M"))){sayYes("em")}else{sayNo("em")};
+
+      // Use .some()
+        if(dataSet.some(datum => (datum.glasses=="yes"))){sayYes("glasses")}else{sayNo("glasses")};
+        if(dataSet.some(datum => (datum.hair=="blue"))){sayYes("blue")}else{sayNo("blue")};
+
+      // Use .find()
+        if(dataSet.find(datum => (datum.name=="Marta"))){showPosition("Marta"); sayYes("Marta")}else{sayNo("Marta")};
+        if(dataSet.find(datum => (datum.name=="Mindy"))){showPosition("Mindy"); sayYes("Mindy")}else{sayNo("Mindy")};
+      
+      // 6. DISPLAYING ANALYSIS 
+        document.getElementById("results").classList.remove("hidden");
+        document.getElementById("reset").classList.remove("hidden");
+        this.classList.add("hidden");
+      }
+    });  
+
+// 7. RESETTING EXERCISE
+	document.getElementById("reset").addEventListener("click", function(){
+		this.classList.add("hidden");
+		document.getElementById("analyze").className="";
+		document.getElementById("results").classList.add("hidden");
+		dataSet = [];
+		showKids();
+		toggleSelect();
+	});
+
+// Feedback: attach a checkmark or cross
+  function sayYes(id){
+    document.getElementById(id).innerHTML = " &#10004;";
+  }
+
+  function sayNo(id){
+    document.getElementById(id).innerHTML = " &#10008;";
+  }  
+
+  // Use .findIndex()
+  function showPosition(id){
+    var positionWords = ["First","Second","Third","Fourth","Fifth","Sixth","Seventh","Eighth","Ninth","Tenth"];
+    var position = dataSet.findIndex(datum => (datum.name==id));
+    document.getElementById(id+"2").innerHTML = "<br>  ("+positionWords[position]+" from the left.)";
+  }
+
+
+// ALL BUTTON BEHAVIOUR
+// End button press animation
+  document.querySelectorAll(".controlButtons button").forEach(function(button){
+    button.addEventListener("transitionend", function(e){
+      if(e.propertyName !== "transform"){return}
+      else{
+        this.classList.remove("pressed");
+      }
+    });
+  });
+
+</script>
+
+</body>
+</html>
