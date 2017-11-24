@@ -44,6 +44,13 @@
 </div> <!-- Wrapper div end-->
 
 <script type="text/javascript">
+// Make iframe responsive
+  function iframeHeight() {
+    var thisFrame = document.getElementById('iframe');
+    if(thisFrame) {
+     thisFrame.height = ( thisFrame.contentWindow.document.body.scrollHeight + (thisFrame.contentWindow.document.body.scrollHeight * 0.05) ) + "px";
+    }
+  }
 
 // On load, read hash from URL
   window.onload = function(){
@@ -58,14 +65,6 @@
 // Load appropriate iframe and title
     loadIt(currentHash);
   };
-
-// Make iframe responsive
-  function iframeHeight() {
-    var thisFrame = document.getElementById('iframe');
-    if(thisFrame) {
-     thisFrame.height = ( thisFrame.contentWindow.document.body.scrollHeight + (thisFrame.contentWindow.document.body.scrollHeight * 0.05) ) + "px";
-    }
-  }
 
 // Object with menu data
   var titles = {
