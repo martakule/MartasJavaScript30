@@ -106,7 +106,6 @@
         selectedKids.forEach(function(kidDiv){
           kidNames.push(kidDiv.getAttribute("data-kid"));
         });
-
     // Push to dataSet those kid objects whose names match
         kidNames.forEach(function(kidName){
           for (var i = 0; i < kids.length; i++) {
@@ -116,7 +115,6 @@
             }
           }          
         });
-
       // 5. ANALYZING DATASET: MAIN POINT OF EXERCISE
       // Use .every()
         if(dataSet.every(datum => (datum.clothes=="red" || datum.clothes=="pink"))){sayYes("red")}else{sayNo("red")};
@@ -143,6 +141,9 @@
 		document.getElementById("analyze").className="";
 		document.getElementById("results").classList.add("hidden");
 		dataSet = [];
+		kidNames = [];
+		document.getElementById("Marta2").innerHTML = "";
+		document.getElementById("Mindy2").innerHTML = "";
 		showKids();
 		toggleSelect();
 	});
