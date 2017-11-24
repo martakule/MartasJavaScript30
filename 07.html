@@ -23,6 +23,8 @@
 
 	<div id="kids">
 	</div>
+  <br>
+  <br>
 
 <script type="text/javascript">
 
@@ -37,6 +39,7 @@
 
 // Empty array for objects
   var kids = [],
+
 // Arrays with data
       kidsName = ['Fang','Olsi','Marta','Calvin','Maryam','Liana','Laura','Matt','Kuru','Mindy','Alex','Taylor'],
       kidsHair = ['brown','brown','brown','none','brown','brown','blond','brown','brown','brown','blue','brown'],
@@ -62,6 +65,7 @@
 	  })
 	  document.getElementById("kids").innerHTML = html.join("");
 	}
+
 // 3. SELECTING DATASET
 // Toggle select on kids
 	toggleSelect();
@@ -87,6 +91,7 @@
 
 // Check if at least one was selected
     var selectedKids = Array.from(document.getElementsByClassName("select"));
+
     if (selectedKids.length == 0) {alert("Pick at least one icon to have a data set.")}
       else {
 
@@ -104,9 +109,12 @@
 
     // Push to dataSet those kid objects whose names match
         kidNames.forEach(function(kidName){
-          kids.find(function(kidObject){
-            if (kidObject.name == kidName){dataSet.push(kidObject)};
-          });
+          for (var i = 0; i < kids.length; i++) {
+            if (kids[i].name == kidName){
+              {dataSet.push(kids[i])};
+              break;
+            }
+          }          
         });
 
       // 5. ANALYZING DATASET: MAIN POINT OF EXERCISE
