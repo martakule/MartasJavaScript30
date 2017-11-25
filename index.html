@@ -54,11 +54,11 @@
 
 // On load, read hash from URL
 
-  var currentHash;
-
   window.onload = function(){
-    currentHash = window.location.hash.substr(1);
-    if(!currentHash) window.location.hash = "00";
+    var currentHash = window.location.hash.substr(1);
+    if(!currentHash) {
+      currentHash = "00";
+      window.location.hash = currentHash;};
 
 // Unhighlight first menu item
 // and highlight the chosen menu item
