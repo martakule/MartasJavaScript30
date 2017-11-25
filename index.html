@@ -53,12 +53,12 @@
   }
 
 // On load, read hash from URL
-  window.onload = function(){
+  document.onload = function(){
     var currentHash = window.location.hash.substr(1);
     if(!currentHash) window.location.hash = "00";
 
 // Unhighlight first menu item
-// and highlight the chosen menu item 
+// and highlight the chosen menu item
     document.querySelector(".itemSelected").className = "";
     document.querySelector("[data-target='"+currentHash+"']").className = "itemSelected";
 
@@ -109,7 +109,7 @@
     document.getElementById("iframe").src = what+".html";
     document.getElementById("number").innerHTML = what + " ";
     document.getElementById("title").innerHTML = titles["item"+what][0];
-    document.getElementById("description").innerHTML = titles["item"+what][1];    
+    document.getElementById("description").innerHTML = titles["item"+what][1];
   }
 
 </script>
