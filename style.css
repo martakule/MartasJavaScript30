@@ -774,6 +774,13 @@ img {
   color: #fcc502;
 }
 
+/*  08 CANVAS  */
+
+#draw {
+  background-color: white;
+  margin:1em auto;
+}
+
 /*  XX CREDITS  */
 
 .credits {

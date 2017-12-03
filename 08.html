@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="controlButtons">
+    <button class="colorButton" id="ff0000">RED</button>
+    <button class="colorButton" id="00ff00">GREEN</button>
+    <button class="colorButton" id="0000ff">BLUE</button>
+    <button>RAINBOW</button>
+    <button>UNDO</button>
+    <button>CLEAR</button>
+  </div>
+
+  <div>
+    <canvas id="draw"></canvas>
+  </div>
+
+<script type="text/javascript">
+
+// The drawing thing
+  const canvas = document.getElementById('draw');
+  const parent = canvas.parentElement;
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // canvas.width = parent.offsetWidth;
+  // canvas.height = parent.offsetHeight;
+
+  ctx.strokeStyle = '#ffff00'; //yellow
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.lineWidth = 30;
+  ctx.globalCompositeOperation = 'lighter';
+
+  var isDrawing = false;
+  var lastX = 0;
+  var lastY = 0;
+  //var hue = 0;
+
+  function draw(e) {
+    if(!isDrawing) return;
+    //ctx.strokeStyle = "hsl("+hue+",65%,75%)";
+    ctx.beginPath();
+    ctx.moveTo(lastX,lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+    //hue++;
+    //if (hue>360){hue=0};
+  }
+
+  canvas.addEventListener('mousedown', (e) => {isDrawing = true;
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+  });
+
+  canvas.addEventListener('mousemove',draw);
+  canvas.addEventListener('mouseup', () => isDrawing = false);
+  canvas.addEventListener('mouseout', () => isDrawing = false);
+
+// Change colour
+
+  document.getElementsByClassName('colorButton')
+
+  document.getElementById('blue').addEventListener('click', function(){
+      ctx.strokeStyle = "#ff0000";
+  });
+
+  document.getElementById('blue').addEventListener('click', function(){
+      ctx.strokeStyle = "#ff0000";
+  });
+
+  document.getElementById('blue').addEventListener('click', function(){
+      ctx.strokeStyle = "#ff0000";
+  });
+
+</script>
+
+</body>
+</html>
