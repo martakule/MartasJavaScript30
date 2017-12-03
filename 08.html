@@ -48,28 +48,29 @@
 
 <script type="text/javascript">
 
-// The drawing thing
+// Invoke a canvas
   const canvas = document.getElementById('draw');
-  const parent = canvas.parentElement;
   const ctx = canvas.getContext('2d');
 
+// Canvas as big as the window
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  // canvas.width = parent.offsetWidth;
-  // canvas.height = parent.offsetHeight;
-
+// Define stroke and blend mode
   ctx.strokeStyle = '#ff0000'; //yellow
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
   ctx.lineWidth = 30;
   ctx.globalCompositeOperation = 'lighter';
 
+// Variable for drawing, coordinates, rainbow
   var isDrawing = false;
   var lastX = 0;
   var lastY = 0;
   var hue = 0;
+  var isRainbow = false;
 
+// Main drawing function
   function draw(e) {
     if(!isDrawing) return;
     ctx.beginPath();
@@ -78,10 +79,10 @@
     ctx.stroke();
     lastX = e.offsetX;
     lastY = e.offsetY;
+    console.log(e);
   }
 
-  var isRainbow = false;
-
+// Drawing in rainbow colour
   function makeRainbow() {
     if(!isRainbow) return;
     ctx.strokeStyle = "hsl("+hue+",85%,65%)";
@@ -89,14 +90,37 @@
     if (hue>360){hue=0};
   }
 
-  canvas.addEventListener('mousedown', (e) => {isDrawing = true;
+// Start drawing
+  canvas.addEventListener('mousedown', function(e) {
+    isDrawing = true;
     lastX = e.offsetX;
     lastY = e.offsetY;
   });
 
+// The touch screen code isn't functional yet
+  // canvas.addEventListener('touchstart', function(e) {
+  //   isDrawing = true;
+  //   e.preventDefault();
+  //   lastX = e.offsetX;
+  //   lastY = e.offsetY;
+  // });
+
+// Keep drawin
   canvas.addEventListener('mousemove',draw);
+
+  // canvas.addEventListener('touchmove', function(e){
+  //   e.preventDefault();
+  //   draw;
+  // });
+
+// Stop drawing
   canvas.addEventListener('mouseup', () => isDrawing = false);
   canvas.addEventListener('mouseout', () => isDrawing = false);
+
+  // canvas.addEventListener('touchend', function(e) {
+  //   e.preventDefault();
+  //   isDrawing = false;
+  // });
 
 // Change pen colour to RGB
   Array.from(document.getElementsByClassName('colorButton')).forEach(function(x){
@@ -115,6 +139,8 @@
     document.getElementById("brush").style.fill = "url('#gradient')";
     ctx.globalCompositeOperation = 'source-over';
     canvas.addEventListener('mousemove',makeRainbow);
+
+    // canvas.addEventListener('touchmove',makeRainbow);
   });
 
 // CLear canvas
