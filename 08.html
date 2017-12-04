@@ -126,39 +126,45 @@
     document.getElementById("brush").style.fill = "url('#gradient')";
     ctx.globalCompositeOperation = 'source-over';
     canvas.addEventListener('mousemove',makeRainbow);
-    // canvas.addEventListener('touchmove',makeRainbow);
+    canvas.addEventListener('touchmove',makeRainbow);
   });
 
-// ----- Touch screen drawing
-  // canvas.addEventListener('touchstart', function(e) {
-  //   isDrawing = true;
-  //   //e.preventDefault();
-  //   lastX = e.changedTouches[0].clientX;
-  //   lastY = e.changedTouches[0].clientY;
-  //   console.log("last x: "+lastX);
-  // });
-
-  // canvas.addEventListener('touchmove', function(e){
-  //   e.preventDefault();
-  //   console.log(isDrawing);
-  //   if(!isDrawing) return;
-  //   ctx.beginPath();
-  //   ctx.moveTo(lastX,lastY);
-  //   ctx.lineTo(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-  //   ctx.stroke();
-  //   lastX = e.changedTouches[0].clientX;
-  //   lastY = e.changedTouches[0].clientY;
-  //   console.log(e);
-  // });
-
-  // canvas.addEventListener('touchend', function(e) {
-  //   //e.preventDefault();
-  //   isDrawing = false;
-  // });
-
-// CLear canvas
+// Clear canvas
   document.getElementById('clear').addEventListener('click', function(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+  });
+
+// TOUCHSCREEN DRAWING
+// The same behaviours as above but for touch events
+  canvas.addEventListener('touchstart', function(e) {
+    isDrawing = true;
+    e.preventDefault();
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+    console.log("last x: "+lastX);
+  });
+
+  canvas.addEventListener('touchmove', function(e){
+    e.preventDefault();
+    console.log(isDrawing);
+    if(!isDrawing) return;
+    ctx.beginPath();
+    ctx.moveTo(lastX,lastY);
+    ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY);
+    ctx.stroke();
+    lastX = e.touches[0].clientX;
+    lastY = e.touches[0].clientY;
+    console.log(e);
+  });
+
+  canvas.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    isDrawing = false;
+  });
+
+  canvas.addEventListener('touchcancel', function(e) {
+    e.preventDefault();
+    isDrawing = false;
   });
 
 </script>
