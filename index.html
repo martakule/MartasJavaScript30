@@ -30,7 +30,7 @@
         <li data-target="xx">xx credits</li>
       </ul>
     </div>
-    <h1><span id="number">00</span><span id="title"> intro</span></h1>
+    <h1 id="titleHead"><span id="number">00</span><span id="title"> intro</span></h1>
 	</header>
 
 	<section>
@@ -113,8 +113,7 @@
 
   function loadIt(what){
     document.getElementById("iframe").src = what+".html";
-    document.getElementById("number").textContent = what + " ";
-    document.getElementById("title").textContent = titles["item"+what][0];
+    document.getElementById("titleHead").innerHTML = '<span id="number">'+what+'&nbsp;</span><span id="title">'+titles["item"+what][0]+'</span>'
     document.getElementById("description").innerHTML = titles["item"+what][1];
   }
 
