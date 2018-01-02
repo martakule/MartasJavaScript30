@@ -7,5 +7,78 @@
 </head>
 <body>
 
+  <canvas id="gameCanvas" width="480" height="320"></canvas>
+
+
+<script type="text/javascript">
+
+// Refer to canvas in DOM and set up context
+  var canvas = document.getElementById("gameCanvas");
+  var ctx = canvas.getContext("2d");
+// Coordinates for ball direction and speed
+  var x = canvas.width/2;
+  var y = canvas.height-30;
+  var dx = 1;
+  var dy = -1;
+// Ball
+  var ballRadius = 10;
+  var hue = 0;
+// Paddle
+  var paddleHeight = 10;
+  var paddleWidth = 75;
+  var paddleX = (canvas.width-paddleWidth)/2;
+
+// Make the ball show
+  function drawBall() {
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+    ctx.fillStyle = "hsl("+hue+",85%,65%)";
+    ctx.fill();
+    ctx.closePath();
+  }
+// Make the paddle show
+  function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+  }
+// Make the ball move
+  function draw() {
+// Clear before each new rendering
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawBall();
+    drawPaddle();
+// Change direction if coordinates hit the edge
+    if(y + dy < ballRadius || y + dy > canvas.height-ballRadius) {
+        dy = -dy;
+        changeBallColor();
+    }
+    if(x + dx < ballRadius || x + dx > canvas.width-ballRadius) {
+        dx = -dx;
+        changeBallColor();
+    }
+// Keep moving the ball by changing its coordinates
+    x += dx;
+    y += dy;
+  }
+
+  function changeBallColor(){
+    hue+=10;
+    if (hue>360){hue=0};
+    ctx.fillStyle = "hsl("+hue+",85%,65%)";
+  }
+
+  setInterval(draw,10);
+
+
+  //ctx.strokeStyle = "rgba(0, 0, 255, 0.5)";
+  //ctx.lineWidth = 1;
+  //ctx.stroke();
+
+
+</script>
+
 </body>
 </html>

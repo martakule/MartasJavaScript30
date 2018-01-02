@@ -787,6 +787,15 @@ img {
   margin-left: 1em;
 }
 
+/*  09 GAME  */
+
+#gameCanvas {
+  background: #eee;
+  display: block;
+  margin: 0 auto;
+  background-color: black;
+}
+
 /*  XX CREDITS  */
 
 .credits {
