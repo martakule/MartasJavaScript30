@@ -7,10 +7,15 @@
 </head>
 <body>
 
-  <canvas id="gameCanvas" width="480" height="320"></canvas>
+  <canvas id="gameCanvas" width="320" height="500">Sorry, your browser doesn't support canvas.</canvas>
 
+  <div class="controlButtons">
+    <button id="playButton">Play</button>
+  </div>
 
 <script type="text/javascript">
+
+function initialize(){
 
 // Refer to canvas in DOM and set up context
   var canvas = document.getElementById("gameCanvas");
@@ -34,16 +39,16 @@
   var leftPressed = false;
 
 // Bricks
-  var brickRowCount = 1;
-  var brickColumnCount = 2;
-  var brickWidth = 75;
+  var brickRowCount = 5;
+  var brickColumnCount = 5;
+  var brickWidth = 50;
   var brickHeight = 20;
   var brickPadding = 10;
   var brickOffsetTop = 30;
-  var brickOffsetLeft = 30;
+  var brickOffsetLeft = 15;
 
   var score = 0;
-  var lives = 2;
+  var lives = 3;
 
   var bricks = [];
   for(c=0; c<brickColumnCount; c++) {
@@ -64,7 +69,7 @@
           bricks[c][r].y = brickY;
           ctx.beginPath();
           ctx.rect(brickX, brickY, brickWidth, brickHeight);
-          ctx.fillStyle = "#0095DD";
+          ctx.fillStyle = "hsl("+hue+",85%,65%)";
           ctx.fill();
           ctx.closePath();
         }
@@ -75,7 +80,7 @@
   function drawBall() {
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "hsl("+hue+",85%,65%)";
+    ctx.fillStyle = "white";
     ctx.fill();
     ctx.closePath();
   }
@@ -88,6 +93,61 @@
     ctx.closePath();
   }
 
+  function changeColor(){
+    hue+=7;
+    if (hue>360){hue=0};
+    ctx.fillStyle = "hsl("+hue+",85%,65%)";
+  }
+
+  function collisionDetection() {
+    for(c=0; c<brickColumnCount; c++) {
+      for(r=0; r<brickRowCount; r++) {
+        var b = bricks[c][r];
+        if (b.status==1) {
+          if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+              dy = -dy;
+              b.status = 0;
+              score++;
+              if(score == brickRowCount*brickColumnCount) {
+                alert(" Congratulations! You won!");
+                document.location.reload();
+              }
+          }
+        }
+      }
+    }
+  }
+
+  function drawScore(){
+    ctx.font = "16px Lato";
+    ctx.fillStyle = "white";
+    ctx.fillText("Score: "+score, 8, 20);
+  }
+
+  function drawLives(){
+    ctx.font = "16px Lato";
+    ctx.fillStyle = "white";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+  }
+
+  document.addEventListener("mousemove", mouseMoveHandler, false);
+  document.addEventListener("touchmove", touchMoveHandler, false);
+
+  function mouseMoveHandler(e) {
+    var relativeX = e.clientX - canvas.offsetLeft;
+    if(relativeX > paddleWidth/2 && relativeX < canvas.width-(paddleWidth/2)) {
+      paddleX = relativeX - paddleWidth/2;
+    }
+  }
+
+  function touchMoveHandler(e) {
+    var relativeX = e.touches[0].clientX - canvas.offsetLeft;
+    if(relativeX > 0 && relativeX < canvas.width) {
+      paddleX = relativeX - paddleWidth/2;
+    }
+  }
+
+
 // Make the ball move
   function draw() {
   // Clear before each new rendering
@@ -98,25 +158,18 @@
     collisionDetection();
     drawScore();
     drawLives();
-  // Move paddle on key presses
-    if(rightPressed && paddleX < canvas.width-paddleWidth) {
-      paddleX += 8;
-    }
-    else if(leftPressed && paddleX > 0) {
-      paddleX -= 8;
-    }
 
   // Change direction and color if coordinates hit the edge
     if(y + dy < ballRadius) {
         dy = -dy;
-        changeBallColor();
+        changeColor();
     }
     else if (y + dy > canvas.height-ballRadius-20) {
-      if (x > paddleX && x < paddleX + paddleWidth) {
+      if (x+ballRadius > paddleX && x-ballRadius < paddleX + paddleWidth) {
         dy = -dy;
       } else {
           lives--;
-          if(!lives) {
+          if(lives<0) {
             alert("Game over.");
             document.location.reload();
           }
@@ -129,9 +182,10 @@
           }
       }
     }
+
     if(x + dx < ballRadius || x + dx > canvas.width-ballRadius) {
         dx = -dx;
-        changeBallColor();
+        changeColor();
     }
   // Keep moving the ball by changing its coordinates
     x += dx;
@@ -140,77 +194,12 @@
     requestAnimationFrame(draw);
   }
 
-  function changeBallColor(){
-    hue+=10;
-    if (hue>360){hue=0};
-    ctx.fillStyle = "hsl("+hue+",85%,65%)";
-  }
-
-  document.addEventListener("keydown", keyDownHandler, false);
-  document.addEventListener("keyup", keyUpHandler, false);
-  document.addEventListener("mousemove", mouseMoveHandler, false);
-
-  function keyDownHandler(e) {
-    if (e.keyCode == 39) {
-      rightPressed = true;
-    }
-    else if (e.keyCode == 37) {
-      leftPressed = true;
-    }
-  }
-
-  function keyUpHandler(e) {
-    if (e.keyCode == 39) {
-      rightPressed = false;
-    }
-    else if (e.keyCode == 37) {
-      leftPressed = false;
-    }
-  }
-
-  function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX > 0 && relativeX < canvas.width) {
-      paddleX = relativeX - paddleWidth/2;
-    }
-  }
-
-  function collisionDetection() {
-    for(c=0; c<brickColumnCount; c++) {
-      for(r=0; r<brickRowCount; r++) {
-        var b = bricks[c][r];
-        if (b.status==1) {
-          if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-              dy = -dy;
-              b.status = 0;
-              score++;
-              if(score==brickRowCount*brickColumnCount) {
-                alert("YOU WIN, CONGRATULATIONS!");
-                document.location.reload();
-              }
-          }
-        }
-      }
-    }
-  }
-
-  function drawScore(){
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "white";
-    ctx.fillText("Score: "+score, 8, 20);
-  }
-
-  function drawLives(){
-    ctx.font = "16px Arial";
-    ctx.fillStyle = "white";
-    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
-  }
-
-
   draw();
+}
 
-
-
+  document.getElementById("playButton").addEventListener("click", function(){
+    initialize();
+  });
 
 </script>
 
