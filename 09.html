@@ -15,6 +15,32 @@
 
 <script type="text/javascript">
 
+// WES'S CONSOLE EXERCISES
+
+const commanders = [{givenName:'Deanna', surname: 'Troi', planet:'Betazed'}, {givenName:'William', surname:'Riker', planet:'Earth'}]
+
+console.log('%cAha, this is how facebook made that huge "Stop!" message...','font-size:24px; color:salmon;');
+console.warn("I can make a warning...");
+console.error("...or an error message...");
+console.info("...or an innocuous informative message.")
+console.assert(document.getElementsByTagName("CANVAS").length==2,"There aren't two canvas on this page.")
+console.dir(document.getElementsByTagName("CANVAS")[0]);
+
+console.time("Iterating Commanders array")
+commanders.forEach(comm => {
+  console.groupCollapsed(`${comm.surname}`);
+  console.log(`Meet Commander ${comm.givenName} ${comm.surname}.` )
+  console.log(`Commander ${comm.surname} hails from ${comm.planet}.` )
+  console.groupEnd(`${comm.surname}`);
+});
+  console.timeEnd("Iterating Commanders array");
+
+console.count("Picard");
+console.count("Picard");
+console.count("Picard");
+
+// JAVASCRIPT GAME
+
 function initialize(){
 
 // Refer to canvas in DOM and set up context
