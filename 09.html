@@ -41,8 +41,6 @@ console.count("Picard");
 
 // JAVASCRIPT GAME
 
-function initialize(){
-
 // Refer to canvas in DOM and set up context
   var canvas = document.getElementById("gameCanvas");
   var ctx = canvas.getContext("2d");
@@ -75,6 +73,8 @@ function initialize(){
 
   var score = 0;
   var lives = 3;
+
+  var play = false;
 
   var bricks = [];
   for(c=0; c<brickColumnCount; c++) {
@@ -132,6 +132,7 @@ function initialize(){
         if (b.status==1) {
           if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
               dy = -dy;
+              changeColor();
               b.status = 0;
               score++;
               if(score == brickRowCount*brickColumnCount) {
@@ -160,16 +161,20 @@ function initialize(){
   document.addEventListener("touchmove", touchMoveHandler, false);
 
   function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
-    if(relativeX > paddleWidth/2 && relativeX < canvas.width-(paddleWidth/2)) {
-      paddleX = relativeX - paddleWidth/2;
+    if (play) {
+      var relativeX = e.clientX - canvas.offsetLeft;
+      if(relativeX > paddleWidth/2 && relativeX < canvas.width-(paddleWidth/2)) {
+        paddleX = relativeX - paddleWidth/2;
+      }
     }
   }
 
   function touchMoveHandler(e) {
-    var relativeX = e.touches[0].clientX - canvas.offsetLeft;
-    if(relativeX > 0 && relativeX < canvas.width) {
-      paddleX = relativeX - paddleWidth/2;
+    if (play) {
+      var relativeX = e.touches[0].clientX - canvas.offsetLeft;
+      if(relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth/2;
+      }
     }
   }
 
@@ -188,11 +193,11 @@ function initialize(){
   // Change direction and color if coordinates hit the edge
     if(y + dy < ballRadius) {
         dy = -dy;
-        changeColor();
     }
     else if (y + dy > canvas.height-ballRadius-20) {
       if (x+ballRadius > paddleX && x-ballRadius < paddleX + paddleWidth) {
         dy = -dy;
+        changeColor();
       } else {
           lives--;
           if(lives<0) {
@@ -214,17 +219,27 @@ function initialize(){
         changeColor();
     }
   // Keep moving the ball by changing its coordinates
-    x += dx;
-    y += dy;
+    if (play) {
+      x += dx;
+      y += dy;
+    }
 
+  // This new thingy instead of set interval. I like it!
     requestAnimationFrame(draw);
   }
 
   draw();
-}
 
+// Stop and start ball and paddle on button click
   document.getElementById("playButton").addEventListener("click", function(){
-    initialize();
+    if (!play) {
+      this.innerText="Pause";
+      play=true;
+    }
+      else {
+        this.innerText="Play";
+        play=false;
+      }
   });
 
 </script>
