@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="gameCanvas" width="320" height="500">Sorry, your browser doesn't support canvas.</canvas>
+
+  <div class="controlButtons">
+    <button id="playButton">Play</button>
+  </div>
+
+<script type="text/javascript">
+
+// WES'S CONSOLE EXERCISES
+
+const commanders = [{givenName:'Deanna', surname: 'Troi', planet:'Betazed'}, {givenName:'William', surname:'Riker', planet:'Earth'}]
+
+console.log('%cAha, this is how facebook made that huge "Stop!" message...','font-size:24px; color:salmon;');
+console.warn("I can make a warning...");
+console.error("...or an error message...");
+console.info("...or an innocuous informative message.")
+console.assert(document.getElementsByTagName("CANVAS").length==2,"There aren't two canvas on this page.")
+console.dir(document.getElementsByTagName("CANVAS")[0]);
+
+console.time("Iterating Commanders array")
+commanders.forEach(comm => {
+  console.groupCollapsed(`${comm.surname}`);
+  console.log(`Meet Commander ${comm.givenName} ${comm.surname}.` )
+  console.log(`Commander ${comm.surname} hails from ${comm.planet}.` )
+  console.groupEnd(`${comm.surname}`);
+});
+  console.timeEnd("Iterating Commanders array");
+
+console.count("Picard");
+console.count("Picard");
+console.count("Picard");
+
+// JAVASCRIPT GAME
+
+// Refer to canvas in DOM and set up context
+  var canvas = document.getElementById("gameCanvas");
+  var ctx = canvas.getContext("2d");
+
+// Coordinates for ball direction and speed
+  var x = canvas.width/2;
+  var y = canvas.height-30;
+  var dx = 4;
+  var dy = -4;
+
+// Ball
+  var ballRadius = 10;
+  var hue = 0;
+
+// Paddle and its controls
+  var paddleHeight = 10;
+  var paddleWidth = 75;
+  var paddleX = (canvas.width-paddleWidth)/2;
+  var rightPressed = false;
+  var leftPressed = false;
+
+// Bricks
+  var brickRowCount = 5;
+  var brickColumnCount = 5;
+  var brickWidth = 50;
+  var brickHeight = 20;
+  var brickPadding = 10;
+  var brickOffsetTop = 30;
+  var brickOffsetLeft = 15;
+
+  var score = 0;
+  var lives = 3;
+
+  var play = false;
+
+  var bricks = [];
+  for(c=0; c<brickColumnCount; c++) {
+      bricks[c] = [];
+      for(r=0; r<brickRowCount; r++) {
+          bricks[c][r] = { x: 0, y: 0, status:1 };
+      }
+  }
+
+  function drawBricks() {
+    for(c=0; c<brickColumnCount; c++) {
+      for(r=0; r<brickRowCount; r++) {
+
+        if(bricks[c][r].status == 1) {
+          var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+          var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
+          bricks[c][r].x = brickX;
+          bricks[c][r].y = brickY;
+          ctx.beginPath();
+          ctx.rect(brickX, brickY, brickWidth, brickHeight);
+          ctx.fillStyle = "hsl("+hue+",85%,65%)";
+          ctx.fill();
+          ctx.closePath();
+        }
+      }
+    }
+  }
+
+  function drawBall() {
+    ctx.beginPath();
+    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight-10, paddleWidth, paddleHeight);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  function changeColor(){
+    hue+=7;
+    if (hue>360){hue=0};
+    ctx.fillStyle = "hsl("+hue+",85%,65%)";
+  }
+
+  function collisionDetection() {
+    for(c=0; c<brickColumnCount; c++) {
+      for(r=0; r<brickRowCount; r++) {
+        var b = bricks[c][r];
+        if (b.status==1) {
+          if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+              dy = -dy;
+              changeColor();
+              b.status = 0;
+              score++;
+              if(score == brickRowCount*brickColumnCount) {
+                alert(" Congratulations! You won!");
+                document.location.reload();
+              }
+          }
+        }
+      }
+    }
+  }
+
+  function drawScore(){
+    ctx.font = "16px Lato";
+    ctx.fillStyle = "white";
+    ctx.fillText("Score: "+score, 8, 20);
+  }
+
+  function drawLives(){
+    ctx.font = "16px Lato";
+    ctx.fillStyle = "white";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+  }
+
+  document.addEventListener("mousemove", mouseMoveHandler, false);
+  document.addEventListener("touchmove", touchMoveHandler, false);
+
+  function mouseMoveHandler(e) {
+    if (play) {
+      var relativeX = e.clientX - canvas.offsetLeft;
+      if(relativeX > paddleWidth/2 && relativeX < canvas.width-(paddleWidth/2)) {
+        paddleX = relativeX - paddleWidth/2;
+      }
+    }
+  }
+
+  function touchMoveHandler(e) {
+    if (play) {
+      var relativeX = e.touches[0].clientX - canvas.offsetLeft;
+      if(relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth/2;
+      }
+    }
+  }
+
+
+// Make the ball move
+  function draw() {
+  // Clear before each new rendering
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    drawBricks();
+    drawBall();
+    drawPaddle();
+    collisionDetection();
+    drawScore();
+    drawLives();
+
+  // Change direction and color if coordinates hit the edge
+    if(y + dy < ballRadius) {
+        dy = -dy;
+    }
+    else if (y + dy > canvas.height-ballRadius-20) {
+      if (x+ballRadius > paddleX && x-ballRadius < paddleX + paddleWidth) {
+        dy = -dy;
+        changeColor();
+      } else {
+          lives--;
+          if(lives<0) {
+            alert("Game over.");
+            document.location.reload();
+          }
+          else {
+            x = canvas.width/2;
+            y = canvas.height-30;
+            dx = 4;
+            dy = -4;
+            paddleX = (canvas.width-paddleWidth)/2;
+          }
+      }
+    }
+
+    if(x + dx < ballRadius || x + dx > canvas.width-ballRadius) {
+        dx = -dx;
+        changeColor();
+    }
+  // Keep moving the ball by changing its coordinates
+    if (play) {
+      x += dx;
+      y += dy;
+    }
+
+  // This new thingy instead of set interval. I like it!
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+
+// Stop and start ball and paddle on button click
+  document.getElementById("playButton").addEventListener("click", function(){
+    if (!play) {
+      this.innerText="Pause";
+      play=true;
+    }
+      else {
+        this.innerText="Play";
+        play=false;
+      }
+  });
+
+</script>
+
+</body>
+</html>
