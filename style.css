@@ -40,8 +40,9 @@ header img {
   font-size: 1.5em;
   float:right;
   position:relative;
-  bottom:2.6em;
+  bottom:1.9em;
   right:1em;
+  margin:0;
   text-shadow: 1px 1px 5px black;
   font-weight: bold;
 }
@@ -147,6 +148,10 @@ h1, h2 {
 	text-transform: lowercase;
 	margin: .2em 0 .25em;
 	padding: 0 20px;
+}
+
+#titleHead {
+  clear:both;
 }
 
 h2 {

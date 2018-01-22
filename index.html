@@ -6,7 +6,7 @@
   <title>Marta Kule | JavasScript 30</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body onresize="iframeHeight()">
+<!-- <body onresize="iframeHeight()"> -->
 
 <div class="wrapper">
 
@@ -100,7 +100,7 @@
 		var currentSelection = target.getAttribute("data-target");
 
 // Load address to iframe and title and description to h1
-    loadIt(currentSelection)
+    loadIt(currentSelection);
 
 // Change link hash
     window.location.hash = currentSelection;
@@ -110,6 +110,8 @@
 	});
 
   function loadIt(what){
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     document.getElementById("iframe").src = what+".html";
     document.getElementById("titleHead").innerHTML = '<span id="number">'+what+' </span><span id="title">'+titles["item"+what][0]+'</span>'
     document.getElementById("description").innerHTML = titles["item"+what][1];
