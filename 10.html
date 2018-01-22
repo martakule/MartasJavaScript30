@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <ul id="tenBoxes">
+    <li><input type="checkbox" id="0"><label for="0"></label></li>
+    <li><input type="checkbox" id="1"><label for="1"></label></li>
+    <li><input type="checkbox" id="2"><label for="2"></label></li>
+    <li><input type="checkbox" id="3"><label for="3"></label></li>
+    <li><input type="checkbox" id="4"><label for="4"></label></li>
+    <li><input type="checkbox" id="5"><label for="5"></label></li>
+    <li><input type="checkbox" id="6"><label for="6"></label></li>
+    <li><input type="checkbox" id="7"><label for="7"></label></li>
+    <li><input type="checkbox" id="8"><label for="8"></label></li>
+    <li><input type="checkbox" id="9"><label for="9"></label></li>
+    <li><input type="checkbox" id="10"><label for="10"></label></li>
+    <li><input type="checkbox" id="11"><label for="11"></label></li>
+    <li><input type="checkbox" id="12"><label for="12"></label></li>
+    <li><input type="checkbox" id="13"><label for="13"></label></li>
+  </ul>
+
+<script type="text/javascript">
+
+// Make array of all checkboxes
+  const checkBoxes = Array.from(document.querySelectorAll("#tenBoxes > li input"));
+  let allChecked = [];
+
+  checkBoxes.forEach(function(x){
+    x.addEventListener("click", function(e){
+// Update arra of checked boxes only if user is checking
+// instead of unchecking
+      if (this.checked) {
+        let checkedIndex = checkBoxes.indexOf(this);
+        allChecked.push(checkedIndex);
+        console.log(allChecked);
+      }
+// Only when shift key is pressed check what was checked last
+      if (e.shiftKey) {
+        let last = allChecked[allChecked.length-1];
+        let secondLast = allChecked[allChecked.length-2];
+        console.log(allChecked);
+      }
+
+    });
+  });
+
+</script>
+
+</body>
+</html>
