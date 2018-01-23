@@ -32,18 +32,26 @@
 
   checkBoxes.forEach(function(x){
     x.addEventListener("click", function(e){
+      var checkedIndex = checkBoxes.indexOf(this);
 // Update arra of checked boxes only if user is checking
 // instead of unchecking
       if (this.checked) {
-        let checkedIndex = checkBoxes.indexOf(this);
+
+      // Push the checked item to array, but limit to last two
         allChecked.push(checkedIndex);
-        console.log(allChecked);
+        if (allChecked.length>=3){allChecked.splice(0,1)}
+
       }
+      if (!this.checked) {
+        allChecked.splice(allChecked.indexOf(checkedIndex),1)}
 // Only when shift key is pressed check what was checked last
       if (e.shiftKey) {
-        let last = allChecked[allChecked.length-1];
-        let secondLast = allChecked[allChecked.length-2];
-        console.log(allChecked);
+        if (allChecked.length==2) {
+          let last = allChecked[1];
+          let secondLast = allChecked[0];
+          if (last>secondLast){console.log(last+" > "+secondLast);checkBoxes[0].checked=true;}
+            else {console.log(last+" < " +secondLast);}
+        }
       }
 
     });
