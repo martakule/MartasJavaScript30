@@ -30,17 +30,24 @@
   const checkBoxes = Array.from(document.querySelectorAll("#tenBoxes > li input"));
   let allChecked = [];
 
+// Check all boxes between two indexes
+  function checkSpan(from,to) {
+    for (i=from; i<=to; i++) {
+      checkBoxes[i].checked=true;
+    }
+  }
+
+// Add click event to every checkbox
   checkBoxes.forEach(function(x){
     x.addEventListener("click", function(e){
+// Find index of currently checked box
       var checkedIndex = checkBoxes.indexOf(this);
-// Update arra of checked boxes only if user is checking
+// Update array of checked boxes only if user is checking
 // instead of unchecking
       if (this.checked) {
-
       // Push the checked item to array, but limit to last two
         allChecked.push(checkedIndex);
         if (allChecked.length>=3){allChecked.splice(0,1)}
-
       }
       if (!this.checked) {
         allChecked.splice(allChecked.indexOf(checkedIndex),1)}
@@ -49,11 +56,11 @@
         if (allChecked.length==2) {
           let last = allChecked[1];
           let secondLast = allChecked[0];
-          if (last>secondLast){console.log(last+" > "+secondLast);checkBoxes[0].checked=true;}
-            else {console.log(last+" < " +secondLast);}
+
+          if (last>secondLast){checkSpan(secondLast,last);}
+            else {checkSpan(last,secondLast);}
         }
       }
-
     });
   });
 
