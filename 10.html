@@ -26,44 +26,70 @@
 
 <script type="text/javascript">
 
-// Make array of all checkboxes
+// All checkboxes we act upon
   const checkBoxes = Array.from(document.querySelectorAll("#tenBoxes > li input"));
-  let allChecked = [];
+  let checkedArray = [];
+  let uncheckedArray = [];
+
+// Remember the box's id
+  function pushId(array) {
+
+    console.log(array);
+  }
+
+// Add click event to every checkbox
+  checkBoxes.forEach(checkbox => checkbox.addEventListener("click", function(e){
+
+    let checkedNow = checkbox.id;
+
+    if (checkbox.checked) {
+      checkedArray.push(checkedNow);
+      uncheckedArray.splice(checkedArray.indexOf(checkedNow),uncheckedArray.length-1);
+      if (checkedArray.length>=3){checkedArray.splice(0,1)}
+      console.log("unchecked: " + uncheckedArray);
+      console.log("checked: " + checkedArray);
+    }
+
+    else {
+      uncheckedArray.push(checkedNow);
+      checkedArray.splice(uncheckedArray.indexOf(checkedNow),checkedArray.length-1);
+      if (uncheckedArray.length>=3){uncheckedArray.splice(0,1)}
+      console.log("unchecked: " + uncheckedArray);
+      console.log("checked: " + checkedArray);
+    }
+
+
+// Find index of currently checked box
+//       var checkedIndex = checkBoxes.indexOf(this);
+// // Update array of checked boxes only if user is checking
+// // instead of unchecking
+//       if (this.checked) {
+//       // Push the checked item to array, but limit to last two
+//         allChecked.push(checkedIndex);
+//         if (allChecked.length>=3){allChecked.splice(0,1)}
+//       }
+//       if (!this.checked) {
+//         allChecked.splice(allChecked.indexOf(checkedIndex),1)}
+// // Only when shift key is pressed check what was checked last
+//       if (e.shiftKey) {
+//         if (allChecked.length==2) {
+//           let last = allChecked[1];
+//           let secondLast = allChecked[0];
+
+//           if (last>secondLast){checkRange(secondLast,last);}
+//             else {checkRange(last,secondLast);}
+//         }
+//       }
+
+  }));
+
 
 // Check all boxes between two indexes
-  function checkSpan(from,to) {
+  function checkRange(from,to) {
     for (i=from; i<=to; i++) {
       checkBoxes[i].checked=true;
     }
   }
-
-// Add click event to every checkbox
-  checkBoxes.forEach(function(x){
-    x.addEventListener("click", function(e){
-// Find index of currently checked box
-      var checkedIndex = checkBoxes.indexOf(this);
-// Update array of checked boxes only if user is checking
-// instead of unchecking
-      if (this.checked) {
-      // Push the checked item to array, but limit to last two
-        allChecked.push(checkedIndex);
-        if (allChecked.length>=3){allChecked.splice(0,1)}
-      }
-      if (!this.checked) {
-        allChecked.splice(allChecked.indexOf(checkedIndex),1)}
-// Only when shift key is pressed check what was checked last
-      if (e.shiftKey) {
-        if (allChecked.length==2) {
-          let last = allChecked[1];
-          let secondLast = allChecked[0];
-
-          if (last>secondLast){checkSpan(secondLast,last);}
-            else {checkSpan(last,secondLast);}
-        }
-      }
-    });
-  });
-
 </script>
 
 </body>
