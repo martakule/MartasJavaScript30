@@ -8,79 +8,32 @@
 <body>
 
   <ul id="tenBoxes">
-    <li><input type="checkbox" id="0"><label for="0"></label></li>
-    <li><input type="checkbox" id="1"><label for="1"></label></li>
-    <li><input type="checkbox" id="2"><label for="2"></label></li>
-    <li><input type="checkbox" id="3"><label for="3"></label></li>
-    <li><input type="checkbox" id="4"><label for="4"></label></li>
-    <li><input type="checkbox" id="5"><label for="5"></label></li>
-    <li><input type="checkbox" id="6"><label for="6"></label></li>
-    <li><input type="checkbox" id="7"><label for="7"></label></li>
-    <li><input type="checkbox" id="8"><label for="8"></label></li>
-    <li><input type="checkbox" id="9"><label for="9"></label></li>
-    <li><input type="checkbox" id="10"><label for="10"></label></li>
-    <li><input type="checkbox" id="11"><label for="11"></label></li>
-    <li><input type="checkbox" id="12"><label for="12"></label></li>
-    <li><input type="checkbox" id="13"><label for="13"></label></li>
+    <li><input type="checkbox" id="0"><label for="0">0 Picard</label></li>
+    <li><input type="checkbox" id="1"><label for="1">1 Riker</label></li>
+    <li><input type="checkbox" id="2"><label for="2">2 Troi</label></li>
+    <li><input type="checkbox" id="3"><label for="3">3 Crusher</label></li>
+    <li><input type="checkbox" id="4"><label for="4">4 La Forge</label></li>
+    <li><input type="checkbox" id="5"><label for="5">5 Data</label></li>
+    <li><input type="checkbox" id="6"><label for="6">6 Worf</label></li>
+    <li><input type="checkbox" id="7"><label for="7">7 Yar</label></li>
+    <li><input type="checkbox" id="8"><label for="8">8 Pulaski</label></li>
+    <li><input type="checkbox" id="9"><label for="9">9 O'Brien</label></li>
   </ul>
 
 <script type="text/javascript">
 
 // All checkboxes we act upon
-  const checkBoxes = Array.from(document.querySelectorAll("#tenBoxes > li input"));
-  let checkedArray = [];
-  let uncheckedArray = [];
-
-// Remember the box's id
-  function pushId(array) {
-
-    console.log(array);
-  }
+  const checkBoxes = document.querySelectorAll("#tenBoxes > li input[type='checkbox']");
+  let fromBox;
+  let toBox;
 
 // Add click event to every checkbox
-  checkBoxes.forEach(checkbox => checkbox.addEventListener("click", function(e){
-
-    let checkedNow = checkbox.id;
-
-    if (checkbox.checked) {
-      checkedArray.push(checkedNow);
-      uncheckedArray.splice(checkedArray.indexOf(checkedNow),uncheckedArray.length-1);
-      if (checkedArray.length>=3){checkedArray.splice(0,1)}
-      console.log("unchecked: " + uncheckedArray);
-      console.log("checked: " + checkedArray);
+  checkBoxes.forEach(box => box.addEventListener("click", function(e){
+    if (e.shiftKey) {
+      toBox = this.id;
     }
-
-    else {
-      uncheckedArray.push(checkedNow);
-      checkedArray.splice(uncheckedArray.indexOf(checkedNow),checkedArray.length-1);
-      if (uncheckedArray.length>=3){uncheckedArray.splice(0,1)}
-      console.log("unchecked: " + uncheckedArray);
-      console.log("checked: " + checkedArray);
-    }
-
-
-// Find index of currently checked box
-//       var checkedIndex = checkBoxes.indexOf(this);
-// // Update array of checked boxes only if user is checking
-// // instead of unchecking
-//       if (this.checked) {
-//       // Push the checked item to array, but limit to last two
-//         allChecked.push(checkedIndex);
-//         if (allChecked.length>=3){allChecked.splice(0,1)}
-//       }
-//       if (!this.checked) {
-//         allChecked.splice(allChecked.indexOf(checkedIndex),1)}
-// // Only when shift key is pressed check what was checked last
-//       if (e.shiftKey) {
-//         if (allChecked.length==2) {
-//           let last = allChecked[1];
-//           let secondLast = allChecked[0];
-
-//           if (last>secondLast){checkRange(secondLast,last);}
-//             else {checkRange(last,secondLast);}
-//         }
-//       }
-
+    fromBox = this.id;
+    console.log("from " + fromBox + " to " + toBox);
   }));
 
 
@@ -90,6 +43,13 @@
       checkBoxes[i].checked=true;
     }
   }
+
+  function uncheckRange(from,to) {
+    for (i=from; i<=to; i++) {
+      checkBoxes[i].checked=false;
+    }
+  }
+
 </script>
 
 </body>
