@@ -29,10 +29,14 @@
 
 // Add click event to every checkbox
   checkBoxes.forEach(box => box.addEventListener("click", function(e){
-    if (e.shiftKey) {
+    if (!e.shiftKey) {
+      fromBox = this.id;
+    }
+
+    else if (e.shiftKey) {
       toBox = this.id;
     }
-    fromBox = this.id;
+
     console.log("from " + fromBox + " to " + toBox);
   }));
 
