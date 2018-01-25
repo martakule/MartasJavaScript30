@@ -767,11 +767,11 @@ img {
   display: none;
 }
 
-#results {
+.simpleList {
   list-style: none;
+  font-size: .9em;
   margin: 0 30px;
-  padding:0;
-  text-align: center;
+  padding:10px;
   border:5px solid #fcc502;
   border-radius: 10px;
   max-width: 310px;
@@ -799,6 +799,11 @@ img {
   display: block;
   margin: 0 auto;
   background-color: black;
+}
+
+/*  10 CHECKBOXES  */
+.clearList {
+  list-style-type: none;
 }
 
 /*  XX CREDITS  */

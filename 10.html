@@ -7,17 +7,16 @@
 </head>
 <body>
 
-  <ul id="tenBoxes">
-    <li><input type="checkbox" id="0"><label for="0">0 Picard</label></li>
-    <li><input type="checkbox" id="1"><label for="1">1 Riker</label></li>
-    <li><input type="checkbox" id="2"><label for="2">2 Troi</label></li>
-    <li><input type="checkbox" id="3"><label for="3">3 Crusher</label></li>
-    <li><input type="checkbox" id="4"><label for="4">4 La Forge</label></li>
-    <li><input type="checkbox" id="5"><label for="5">5 Data</label></li>
-    <li><input type="checkbox" id="6"><label for="6">6 Worf</label></li>
-    <li><input type="checkbox" id="7"><label for="7">7 Yar</label></li>
-    <li><input type="checkbox" id="8"><label for="8">8 Pulaski</label></li>
-    <li><input type="checkbox" id="9"><label for="9">9 O'Brien</label></li>
+  <ul id="tenBoxes" class="simpleList">
+    <li><input type="checkbox" id="0"><span>Captain Jean-Luc Picard</span></li>
+    <li><input type="checkbox" id="1"><span>Commander William T. Riker</span></li>
+    <li><input type="checkbox" id="2"><span>Commander Deanna Troi</span></li>
+    <li><input type="checkbox" id="3"><span>Commander Beverly Crusher</span></li>
+    <li><input type="checkbox" id="4"><span>Lieutenant Commander Geordi La Forge</span></li>
+    <li><input type="checkbox" id="5"><span>Lieutenant Commander Data</span></li>
+    <li><input type="checkbox" id="6"><span>Lieutenant Commander Worf</span></li>
+    <li><input type="checkbox" id="7"><span>Lieutenant Natasha Yar</span></li>
+    <li><input type="checkbox" id="8"><span>Commander Katherine Pulaski</span></li>
   </ul>
 
 <script type="text/javascript">
@@ -29,31 +28,31 @@
 
 // Add click event to every checkbox
   checkBoxes.forEach(box => box.addEventListener("click", function(e){
+    // Get the box from which the range will start
     if (!e.shiftKey) {
-      fromBox = this.id;
+      fromBox = this;
     }
-
+    // Get the box on which the range will end
     else if (e.shiftKey) {
-      toBox = this.id;
+      toBox = this;
+    // Handle all cases of checking and unchecking
+      if (!fromBox || ( !fromBox.checked && toBox.checked) ) { range(0,toBox.id,true); }
+      if (fromBox && fromBox.checked && toBox.checked) { range(fromBox.id,toBox.id,true); }
+      if (fromBox && !fromBox.checked && !toBox.checked) { range(fromBox.id,toBox.id,false); }
+      if (fromBox && fromBox.checked && !toBox.checked) { range(0,toBox.id,false); }
     }
-
-    console.log("from " + fromBox + " to " + toBox);
   }));
 
-
-// Check all boxes between two indexes
-  function checkRange(from,to) {
-    for (i=from; i<=to; i++) {
-      checkBoxes[i].checked=true;
+// Check or uncheck all boxes between two indices
+  function range(from,to,action) {
+    let a;
+    let z;
+    if (from > to){ a=to; z=from; }
+    else { z=to; a=from; }
+    for (i=a; i<=z; i++) {
+      checkBoxes[i].checked=action;
     }
   }
-
-  function uncheckRange(from,to) {
-    for (i=from; i<=to; i++) {
-      checkBoxes[i].checked=false;
-    }
-  }
-
 </script>
 
 </body>
