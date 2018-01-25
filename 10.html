@@ -4,25 +4,95 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="style.css">
-</head>
-<body>
+  <link href="https://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
+  <style>
 
-  <ul id="tenBoxes" class="simpleList">
-    <li><input type="checkbox" id="0"><span>Captain Jean-Luc Picard</span></li>
-    <li><input type="checkbox" id="1"><span>Commander William T. Riker</span></li>
-    <li><input type="checkbox" id="2"><span>Commander Deanna Troi</span></li>
-    <li><input type="checkbox" id="3"><span>Commander Beverly Crusher</span></li>
-    <li><input type="checkbox" id="4"><span>Lieutenant Commander Geordi La Forge</span></li>
-    <li><input type="checkbox" id="5"><span>Lieutenant Commander Data</span></li>
-    <li><input type="checkbox" id="6"><span>Lieutenant Commander Worf</span></li>
-    <li><input type="checkbox" id="7"><span>Lieutenant Natasha Yar</span></li>
-    <li><input type="checkbox" id="8"><span>Commander Katherine Pulaski</span></li>
+    body.starTrek {
+      background: black;
+    }
+    
+    .starTrekList {
+      margin: 20px;
+      padding: 10px;
+      width: 300px;
+      list-style: none;
+    }
+
+    .starTrekList li {
+      display: flex;
+      align-items:center;
+    }
+
+    .starTrekList span {
+      display: block;
+      padding: 5px;
+      height: 37px;
+      border-radius: 50% 0 0 50%;
+    }    
+    
+    .starTrekList p {
+      margin: 3px 0;
+      padding: 8px;
+      width: 100%;
+      text-align: right;
+      font-size: 14px;
+      font-family: 'Oswald', sans-serif;
+      color: black;
+      text-transform: uppercase;
+    }          
+
+    .starTrekList input:checked + p {
+      background:rgba(255,0,0, 0.55);
+     }
+
+     .thingy {
+      width:20px;
+      margin: 0 6px;
+      border-radius: 0 !important;
+     }
+
+     .captain > * {
+        background-color: #cc6699;
+     }
+
+     .commander > * {
+        background-color: #ff9900;
+     }
+
+     .ltComm > * {
+        background-color: #9999cc;
+     }
+
+     .lieutenant > * {
+        background-color: #cc99cc;
+     }
+
+     .whiteBg {
+      background:white;
+     }
+
+  </style>
+</head>
+
+<body class="starTrek">
+
+  <ul id="tenBoxes" class="starTrekList">
+    <li class="commander"><span><input type="checkbox" id="3"></span><span class="thingy"></span><p>Commander Crusher</p></li>
+    <li class="ltComm"><span><input type="checkbox" id="6"></span><span class="thingy"></span><p>Lieutenant Commander Data</p></li>
+    <li class="ltComm"><span><input type="checkbox" id="5"></span><span class="thingy"></span><p>Lieutenant Commander La Forge</p></li>
+    <li class="captain"><span><input type="checkbox" id="0"></span><span class="thingy"></span><p>Captain Picard</p></li>
+    <li class="commander"><span><input type="checkbox" id="4"></span><span class="thingy"></span><p>Commander Pulaski</p></li>
+    <li class="commander"><span><input type="checkbox" id="1"></span><span class="thingy"></span><p>Commander Riker</p></li>
+    <li class="commander"><span><input type="checkbox" id="2"></span><span class="thingy"></span><p>Commander Troi</p></li>
+    <li class="ltComm"><span><input type="checkbox" id="7"></span><span class="thingy"></span><p>Lieutenant  Worf</p></li>
+    <li class="lieutenant"><span><input type="checkbox" id="8"></span><span class="thingy"></span><p>Lieutenant Yar</p></li>
   </ul>
 
 <script type="text/javascript">
 
 // All checkboxes we act upon
   const checkBoxes = document.querySelectorAll("#tenBoxes > li input[type='checkbox']");
+  const nameTag = document.querySelectorAll("#tenBoxes p");
   let fromBox;
   let toBox;
 
@@ -36,7 +106,7 @@
     else if (e.shiftKey) {
       toBox = this;
     // Handle all cases of checking and unchecking
-      if (!fromBox || ( !fromBox.checked && toBox.checked) ) { range(0,toBox.id,true); }
+      if (!fromBox || ( !fromBox.checked && toBox.checked) ) { range(0,toBox.id,true); console.log("toBox.id");}
       if (fromBox && fromBox.checked && toBox.checked) { range(fromBox.id,toBox.id,true); }
       if (fromBox && !fromBox.checked && !toBox.checked) { range(fromBox.id,toBox.id,false); }
       if (fromBox && fromBox.checked && !toBox.checked) { range(0,toBox.id,false); }
@@ -52,6 +122,7 @@
     for (i=a; i<=z; i++) {
       checkBoxes[i].checked=action;
     }
+    console.log("from "+a+" to "+z);
   }
 </script>
 
