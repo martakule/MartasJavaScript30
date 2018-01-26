@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet">
+  <style>
+
+    body.starTrek {
+      background: black;
+    }
+
+    .starTrekList {
+      margin: 20px auto;
+      padding: 10px;
+      width: 300px;
+      list-style: none;
+    }
+
+    .starTrekList li {
+      display: flex;
+      align-items:center;
+    }
+
+    .starTrekList span {
+      display: block;
+      padding: 5px;
+      height: 37px;
+      border-radius: 50% 0 0 50%;
+    }
+
+     .thingy {
+      width:20px;
+      margin: 0 6px;
+      border-radius: 0 !important;
+     }
+
+    .starTrekList p {
+      margin: 3px 0;
+      padding: 8px;
+      height: 37px;
+      width: 100%;
+      text-align: right;
+      font-size: 14px;
+      font-family: 'Oswald', sans-serif;
+      color: black;
+      text-transform: uppercase;
+    }
+
+    .starTrekList input:checked + p {
+      background:rgba(255,0,0, 0.55);
+     }
+
+     .captain > * {
+        background-color: #cc6699;
+     }
+
+     .commander > * {
+        background-color: #ff9900;
+     }
+
+     .ltComm > * {
+        background-color: #9999cc;
+     }
+
+     .lieutenant > * {
+        background-color: #cc99cc;
+     }
+
+     .lightUp {
+      background:#ffefbf;
+     }
+
+  </style>
+</head>
+
+<body class="starTrek">
+
+  <ul id="tenBoxes" class="starTrekList">
+    <li class="commander"><span class="theBox"><input type="checkbox" id="0"></span><span class="thingy"></span><p>Commander Crusher</p></li>
+    <li class="ltComm"><span class="theBox"><input type="checkbox" id="1"></span><span class="thingy"></span><p>Lieutenant Commander Data</p></li>
+    <li class="ltComm"><span class="theBox"><input type="checkbox" id="2"></span><span class="thingy"></span><p>Lieutenant Commander La Forge</p></li>
+    <li class="captain"><span class="theBox"><input type="checkbox" id="3"></span><span class="thingy"></span><p>Captain Picard</p></li>
+    <li class="commander"><span class="theBox"><input type="checkbox" id="4"></span><span class="thingy"></span><p>Commander Pulaski</p></li>
+    <li class="commander"><span class="theBox"><input type="checkbox" id="5"></span><span class="thingy"></span><p>Commander Riker</p></li>
+    <li class="commander"><span class="theBox"><input type="checkbox" id="6"></span><span class="thingy"></span><p>Commander Troi</p></li>
+    <li class="ltComm"><span class="theBox"><input type="checkbox" id="7"></span><span class="thingy"></span><p>Lieutenant Commander Worf</p></li>
+    <li class="lieutenant"><span class="theBox"><input type="checkbox" id="8"></span><span class="thingy"></span><p>Lieutenant Yar</p></li>
+  </ul>
+
+<script type="text/javascript">
+
+// All checkboxes we act upon
+
+  const liElements = document.querySelectorAll("#tenBoxes > li");
+  const checkBoxes = document.querySelectorAll("#tenBoxes > li input[type='checkbox']");
+
+  let fromBox;
+  let toBox;
+
+// Add click event to every checkbox
+  checkBoxes.forEach(box => box.addEventListener("click", function(e){
+    // Get the p tag and toggle highlight with check/uncheck
+    var nameTag = liElements[box.id].querySelector("p");
+    if (this.checked) {nameTag.classList.add("lightUp");}
+      else {nameTag.classList.remove("lightUp");} 
+
+    // Get the box from which the range will start
+    if (!e.shiftKey) {
+      fromBox = this;
+    }
+    // Get the box on which the range will end
+    else if (e.shiftKey) {
+      toBox = this;
+    // Handle all cases of checking and unchecking
+      if (!fromBox || ( !fromBox.checked && toBox.checked) ) { range(0,toBox.id,true);}
+      if (fromBox && fromBox.checked && toBox.checked) { range(fromBox.id,toBox.id,true); }
+      if (fromBox && !fromBox.checked && !toBox.checked) { range(fromBox.id,toBox.id,false); }
+      if (fromBox && fromBox.checked && !toBox.checked) { range(0,toBox.id,false); }
+    }
+  }));
+
+// Check or uncheck all boxes between two indices
+  function range(from,to,action) {
+    let a;
+    let z;
+    if (from > to){ a=to; z=from; }
+    else { z=to; a=from; }
+    for (i=a; i<=z; i++) {
+      checkBoxes[i].checked=action;
+      if (action) {liElements[i].querySelector("p").classList.add("lightUp");}
+      else {liElements[i].querySelector("p").classList.remove("lightUp");}      
+    }
+    console.log("from "+a+" to "+z);
+  }
+
+
+</script>
+
+</body>
+</html>

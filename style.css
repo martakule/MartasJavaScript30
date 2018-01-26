@@ -1,5 +1,5 @@
 /* Get fonts for all 32 pages */
-@import url('https://fonts.googleapis.com/css?family=Lato:300,300i|Nova+Mono');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,300i,700|Nova+Mono');
 
 /* Box model */
 html {
@@ -192,16 +192,18 @@ p, li, td {
 
 a {
   text-decoration: none;
-  border-bottom:1px solid #fcc502;
+  font-weight: bold;
   color:#fcc502;
+  margin-bottom: -3px;
+  line-height: .9;
 }
 
 a:visited {
-  color:white;
+  color:#d85de7;
 }
 
 a:hover {
-  color:darkgrey;
+  color:lightgrey;
 }
 
 img {
@@ -767,11 +769,11 @@ img {
   display: none;
 }
 
-#results {
+.simpleList {
   list-style: none;
+  font-size: .9em;
   margin: 0 30px;
-  padding:0;
-  text-align: center;
+  padding:10px;
   border:5px solid #fcc502;
   border-radius: 10px;
   max-width: 310px;
@@ -799,6 +801,11 @@ img {
   display: block;
   margin: 0 auto;
   background-color: black;
+}
+
+/*  10 CHECKBOXES  */
+.clearList {
+  list-style-type: none;
 }
 
 /*  XX CREDITS  */
