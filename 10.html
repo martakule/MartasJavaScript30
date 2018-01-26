@@ -25,10 +25,16 @@
 
     .starTrekList span {
       display: block;
-      padding: 0 5px;
+      padding: 5px;
       height: 37px;
       border-radius: 50% 0 0 50%;
     }
+
+     .thingy {
+      width:20px;
+      margin: 0 6px;
+      border-radius: 0 !important;
+     }
 
     .starTrekList p {
       margin: 3px 0;
@@ -44,12 +50,6 @@
 
     .starTrekList input:checked + p {
       background:rgba(255,0,0, 0.55);
-     }
-
-     .thingy {
-      width:20px;
-      margin: 0 6px;
-      border-radius: 0 !important;
      }
 
      .captain > * {
@@ -68,7 +68,7 @@
         background-color: #cc99cc;
      }
 
-     li > *:hover {
+     .lightUp {
       background:#ffefbf;
      }
 
@@ -78,34 +78,34 @@
 <body class="starTrek">
 
   <ul id="tenBoxes" class="starTrekList">
-    <li class="commander"><span><input type="checkbox" id="3"></span><span class="thingy"></span><p>Commander Crusher</p></li>
-    <li class="ltComm"><span><input type="checkbox" id="6"></span><span class="thingy"></span><p>Lieutenant Commander Data</p></li>
-    <li class="ltComm"><span><input type="checkbox" id="5"></span><span class="thingy"></span><p>Lieutenant Commander La Forge</p></li>
-    <li class="captain"><span><input type="checkbox" id="0"></span><span class="thingy"></span><p>Captain Picard</p></li>
-    <li class="commander"><span><input type="checkbox" id="4"></span><span class="thingy"></span><p>Commander Pulaski</p></li>
-    <li class="commander"><span><input type="checkbox" id="1"></span><span class="thingy"></span><p>Commander Riker</p></li>
-    <li class="commander"><span><input type="checkbox" id="2"></span><span class="thingy"></span><p>Commander Troi</p></li>
-    <li class="ltComm"><span><input type="checkbox" id="7"></span><span class="thingy"></span><p>Lieutenant  Worf</p></li>
-    <li class="lieutenant"><span><input type="checkbox" id="8"></span><span class="thingy"></span><p>Lieutenant Yar</p></li>
+    <li class="commander"><span class="theBox"><input type="checkbox" id="0"></span><span class="thingy"></span><p>Commander Crusher</p></li>
+    <li class="ltComm"><span class="theBox"><input type="checkbox" id="1"></span><span class="thingy"></span><p>Lieutenant Commander Data</p></li>
+    <li class="ltComm"><span class="theBox"><input type="checkbox" id="2"></span><span class="thingy"></span><p>Lieutenant Commander La Forge</p></li>
+    <li class="captain"><span class="theBox"><input type="checkbox" id="3"></span><span class="thingy"></span><p>Captain Picard</p></li>
+    <li class="commander"><span class="theBox"><input type="checkbox" id="4"></span><span class="thingy"></span><p>Commander Pulaski</p></li>
+    <li class="commander"><span class="theBox"><input type="checkbox" id="5"></span><span class="thingy"></span><p>Commander Riker</p></li>
+    <li class="commander"><span class="theBox"><input type="checkbox" id="6"></span><span class="thingy"></span><p>Commander Troi</p></li>
+    <li class="ltComm"><span class="theBox"><input type="checkbox" id="7"></span><span class="thingy"></span><p>Lieutenant Commander Worf</p></li>
+    <li class="lieutenant"><span class="theBox"><input type="checkbox" id="8"></span><span class="thingy"></span><p>Lieutenant Yar</p></li>
   </ul>
 
 <script type="text/javascript">
 
 // All checkboxes we act upon
 
-  // window.addEventListener("keydown", function(e){
-  //   if (e.keyCode==16){e.preventDefault();}
-  // });
-
+  const liElements = document.querySelectorAll("#tenBoxes > li");
   const checkBoxes = document.querySelectorAll("#tenBoxes > li input[type='checkbox']");
-  const elements = Array.from(document.querySelectorAll("#tenBoxes > li"));
-  console.log(elements);
-  const nameTag = document.querySelectorAll("#tenBoxes p");
+
   let fromBox;
   let toBox;
 
 // Add click event to every checkbox
   checkBoxes.forEach(box => box.addEventListener("click", function(e){
+    // Get the p tag and toggle highlight with check/uncheck
+    var nameTag = liElements[box.id].querySelector("p");
+    if (this.checked) {nameTag.classList.add("lightUp");}
+      else {nameTag.classList.remove("lightUp");} 
+
     // Get the box from which the range will start
     if (!e.shiftKey) {
       fromBox = this;
@@ -114,7 +114,7 @@
     else if (e.shiftKey) {
       toBox = this;
     // Handle all cases of checking and unchecking
-      if (!fromBox || ( !fromBox.checked && toBox.checked) ) { range(0,toBox.id,true); console.log("toBox.id");}
+      if (!fromBox || ( !fromBox.checked && toBox.checked) ) { range(0,toBox.id,true);}
       if (fromBox && fromBox.checked && toBox.checked) { range(fromBox.id,toBox.id,true); }
       if (fromBox && !fromBox.checked && !toBox.checked) { range(fromBox.id,toBox.id,false); }
       if (fromBox && fromBox.checked && !toBox.checked) { range(0,toBox.id,false); }
@@ -129,9 +129,13 @@
     else { z=to; a=from; }
     for (i=a; i<=z; i++) {
       checkBoxes[i].checked=action;
+      if (action) {liElements[i].querySelector("p").classList.add("lightUp");}
+      else {liElements[i].querySelector("p").classList.remove("lightUp");}      
     }
     console.log("from "+a+" to "+z);
   }
+
+
 </script>
 
 </body>
