@@ -14,22 +14,26 @@
 		<img src="images/banner.jpg">
     <p class="subtitle">Marta’s JavaScript Workout</p>
     <div class="menu" id="menu">
-      <span class="icon"><img src="images/menu.svg"></span>
-      <span class="word">menu</span>
-      <span class="close"><img src="images/close.svg"></span>
-      <ul>
-        <li data-target="00" class="itemSelected">00 intro</li>
-        <li data-target="01">01 cat music</li>
-        <li data-target="02">02 clock</li>
-        <li data-target="03">03 controls</li>
-        <li data-target="04">04 arrays one</li>
-        <li data-target="05">05 panels</li>
-        <li data-target="06">06 cities</li>
-        <li data-target="07">07 arrays two</li>
-        <li data-target="08">08 canvas</li>
-        <li data-target="09">09 bricks</li>
-        <li data-target="10">10 shift key</li>
-        <li data-target="xx">xx credits</li>
+      <button>
+        <span class="icon"><img src="images/menu.svg" alt="menu"></span>
+        <span class="word">menu</span>
+      </button>
+      <button class="close" id="close">
+        <img src="images/close.svg" alt="close menu">
+      </button>
+      <ul role="menu">
+        <li role="menuitem"><a href="00" class="itemSelected">00 intro</a></li>
+        <li role="menuitem"><a href="01">01 cat music</a></li>
+        <li role="menuitem"><a href="02">02 clock</a></li>
+        <li role="menuitem"><a href="03">03 controls</a></li>
+        <li role="menuitem"><a href="04">04 arrays one</a></li>
+        <li role="menuitem"><a href="05">05 panels</a></li>
+        <li role="menuitem"><a href="06">06 cities</a></li>
+        <li role="menuitem"><a href="07">07 arrays two</a></li>
+        <li role="menuitem"><a href="08">08 canvas</a></li>
+        <li role="menuitem"><a href="09">09 bricks</a></li>
+        <li role="menuitem"><a href="10">10 shift key</a></li>
+        <li role="menuitem"><a href="xx">xx credits</a></li>
       </ul>
     </div>
     <h1 id="titleHead"><span id="number">00</span><span id="title"> intro</span></h1>
@@ -45,7 +49,7 @@
 <script type="text/javascript">
 // Make iframe responsive
   function iframeHeight() {
-    var thisFrame = document.getElementById('iframe');
+    const thisFrame = document.getElementById('iframe');
     if(thisFrame) {
      thisFrame.height = ( thisFrame.contentWindow.document.body.scrollHeight + (thisFrame.contentWindow.document.body.scrollHeight * 0.05) ) + "px";
     }
@@ -53,7 +57,7 @@
 
 // On load, read hash from URL
   window.onload = function(){
-    var currentHash = window.location.hash.substr(1);
+    const currentHash = window.location.hash.substr(1);
     if(!currentHash) {
       currentHash = "00";
       window.location.hash = currentHash;};
@@ -61,14 +65,14 @@
 // Unhighlight first menu item
 // and highlight the chosen menu item
     document.querySelector(".itemSelected").className = "";
-    document.querySelector("[data-target='"+currentHash+"']").className = "itemSelected";
+    document.querySelector("a[href='"+currentHash+"']").className = "itemSelected";
 
 // Load appropriate iframe and title
     loadIt(currentHash);
   };
 
 // Object with menu data
-  var titles = {
+  const titles = {
     "item00":["intro","Hello world!"],
     "item01":["Cat Music","This is my variation on Wes’s original keyboard drum kit. I added click events to make it work on touch screens. To play the meows, tap or click on the tiles or press the corresponding keys on the keyboard."],
     "item02":["clock","This clock is made entirely of divs &mdash; the browser’s building blocks. Click or tap on the clock to see its ever simpler look."],
@@ -83,33 +87,36 @@
     "itemxx":["credits","A huge <em>thank you</em> to all these generous creators:"]
   };
 
+  const menuItems = document.querySelectorAll('.menu a');
+
 // Open and close menu
   document.getElementById("menu").addEventListener("click", function(e) {
     this.classList.toggle("openMenu");
+    // If the menu is closed, don't allow tabbing on anything inside the menu
+    const isMenuOpen = this.classList.contains("openMenu")
+    document.getElementById("close").setAttribute('tabindex', isMenuOpen ? '0' : '-1');
+    Array.prototype.forEach.call(menuItems, function(el){
+      el.setAttribute('tabindex', isMenuOpen ? '0' : '-1');
+    });
   });
 
-// Make menu items react to clicks
-	document.querySelector('.menu ul').addEventListener('click', function (e) {
-	  var target = e.target;
-
-// Chanage color of currently selected menu item
-		if (target.tagName === 'LI') {
-	    e.currentTarget.querySelector('.itemSelected').classList.remove('itemSelected');
-	    target.classList.add('itemSelected');
-	  }
-
-// Get selected item's data-target
-		var currentSelection = target.getAttribute("data-target");
-
-// Load address to iframe and title and description to h1
-    loadIt(currentSelection);
-
-// Change link hash
-    window.location.hash = currentSelection;
-
-// Focus iframe
-    document.getElementById("iframe").focus();
-	});
+// Make menu items react to clicks and keyboard
+  Array.prototype.forEach.call(menuItems, function(el){
+    el.addEventListener("click", function(e) {
+      // Prevent link, use onClick
+      e.preventDefault();
+      // Chanage color of currently selected menu item
+      document.querySelector('.itemSelected').classList.remove('itemSelected');
+      el.classList.add('itemSelected');
+      const currentSelection = el.getAttribute("href");
+      // Load address to iframe and title and description to h1
+      loadIt(currentSelection);
+      // Change link hash
+      window.location.hash = currentSelection;
+      // Focus iframe
+      document.getElementById("iframe").focus();
+		});
+  });
 
   function loadIt(what){
     document.body.scrollTop = 0; // For Safari
